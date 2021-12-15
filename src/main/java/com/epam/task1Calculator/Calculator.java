@@ -14,10 +14,10 @@ public class Calculator {
         return firstOperand * secondOperand;
     }
 
-    public double divide(int firstOperand, int secondOperand) {
+    public double divide(double firstOperand, double secondOperand) {
         if (secondOperand == 0) {
             throw new IllegalArgumentException("It's not possible dividing by 0");
         }
-        return (double) firstOperand / secondOperand;
+        return firstOperand / secondOperand;
     }
 }

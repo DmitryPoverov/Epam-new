@@ -17,7 +17,7 @@ public class CalculatorTest {
     @Test
     public void testShouldAddWhenSixAndTwoThenReturnEight() {
         //given
-        //this is the full write of "given" block, without of @before method.
+        //this is а full writing of "given" block, without of @before method.
         Calculator calculatorLocal = new Calculator();
         int firstOperand = 6;
         int secondOperand = 2;
@@ -30,7 +30,7 @@ public class CalculatorTest {
     @Test
     public void testShouldAddWhenMinusThreeAndMinusTwoThenReturnMinusFive() {
         //given
-        //this is also a full write of "given" block, without the @before method.
+        //this is also a full writing of "given" block, without the @before method.
         Calculator calculatorLocal = new Calculator();
         int firstOperand = -3;
         int secondOperand = -2;
@@ -43,7 +43,7 @@ public class CalculatorTest {
     @Test
     public void testShouldSubtractWhenThreeAndTwoThenReturnOne() {
         //given
-        //this is a shorter write of "given" block, calculatorGlobal Installed here, without the @before method.
+        //this is a shorter writing of "given" block, calculatorGlobal was initialized here, without the @before method.
         calculatorGlobal = new Calculator();
         //when
         double result = calculatorGlobal.subtract(3, 2);
@@ -54,7 +54,7 @@ public class CalculatorTest {
     @Test
     public void testShouldSubtractWhenThirteenAndTenThenReturnOne() {
         //given
-        //this is also a shorter write of "given" block, without the @before method.
+        //this is also a shorter writing of "given" block, calculatorGlobal was initialized here, without the @before method.
         calculatorGlobal = new Calculator();
         //when
         double result = calculatorGlobal.subtract(13, 10);
@@ -65,7 +65,7 @@ public class CalculatorTest {
     @Test
     public void testShouldMultiplyWhenTwoAndThreeThenReturnSix() {
         //given
-        //this is the shortest write of "given" block, with the @before method.
+        //this is the shortest writing of "given" block, calculatorGlobal was initialized in the @before method.
         //when
         double result = calculatorGlobal.multiply(2, 3);
         //then
@@ -75,7 +75,7 @@ public class CalculatorTest {
     @Test
     public void testShouldMultiplyWhenTwoAndEightThenReturnSixteen() {
         //given
-        //this is also the shortest write of "given" block, with the @before method.
+        //this is also the shortest writing of "given" block, calculatorGlobal was initialized in the @before method.
         //when
         double result = calculatorGlobal.multiply(2, 8);
         //then
@@ -85,7 +85,7 @@ public class CalculatorTest {
     @Test
     public void testShouldDivideWhenTenAndTwoThenReturnFive() {
         //given
-        //this is also the shortest write of "given" block, with the @before method.
+        //this is also the shortest writing of "given" block, calculatorGlobal was initialized in the @before method.
         //when
         double result = calculatorGlobal.divide(10, 2);
         //then
@@ -95,7 +95,7 @@ public class CalculatorTest {
     @Test
     public void testShouldDivideWhenMinusTwelveAndFourThenReturnMinusThree() {
         //given
-        //this is also the shortest write of "given" block, with the @before method.
+        //this is also the shortest writing of "given" block, calculatorGlobal was initialized in the @before method.
         //when
         double result = calculatorGlobal.divide(-12, 4);
         //then
@@ -105,7 +105,7 @@ public class CalculatorTest {
     @Test(expected = IllegalArgumentException.class)
     public void testShouldThrowExceptionWhenSecondOperandIsZero() {
         //given
-        //this is also the shortest write of "given" block, with the @before method.
+        //this is also the shortest writing of "given" block, calculatorGlobal was initialized in the @before method.
         //when
         calculatorGlobal.divide(4, 0);
         //then
