@@ -7,9 +7,8 @@ public class CalculatorTest {
 
     private static final double DELTA = 0.00000001;
 
-
     @Test
-    public void testShouldAddAndReturnEightWhenSixAndTwo() {
+    public void testShouldAddWhenSixAndTwoThenReturnEight() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -19,7 +18,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldAddAndReturnMinusThreeWhenMinusThreeAndMinusTwo() {
+    public void testShouldAddWhenMinusThreeAndMinusTwoThenReturnMinusThree() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -29,7 +28,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldSubtractAndReturnOneWhenThreeAndTwo() {
+    public void testShouldSubtractWhenThreeAndTwoThenReturnOne() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -39,7 +38,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldSubtractAndReturnOneWhenThirteenAndTen() {
+    public void testShouldSubtractWhenThirteenAndTenThenReturnOne() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -49,7 +48,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldMultiplyAndReturnSixWhenTwoAndThree() {
+    public void testShouldMultiplyWhenTwoAndThreeThenReturnSix() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -59,7 +58,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldMultiplyAndReturnSixteenWhenTwoAndEight() {
+    public void testShouldMultiplyWhenTwoAndEightThenReturnSixteen() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -69,7 +68,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldDivideWhenInputIsCorrectAndReturnFiveWhenTenAndTwo() {
+    public void testShouldDivideWhenTenAndTwoThenReturnFive() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -79,7 +78,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldDivideWhenInputIsCorrectAndReturnMinusThreeWhenTwelveAndMinusFour() {
+    public void testShouldDivideWhenMinusTwelveAndFourThenReturnMinusThree() {
         //given
         Calculator calculator = new Calculator();
         //when
@@ -89,11 +88,11 @@ public class CalculatorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testShouldThrowExceptionWhenSecondOperandIs0() {
+    public void testShouldThrowExceptionWhenSecondOperandIsZero() {
         //given
         Calculator calculator = new Calculator();
         //when
-        double result = calculator.divide(4, 0);
+        calculator.divide(4, 0);
         //then
         //I don't know what's the "then" here.
     }
