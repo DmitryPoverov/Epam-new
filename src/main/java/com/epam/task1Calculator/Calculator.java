@@ -2,22 +2,22 @@ package com.epam.task1Calculator;
 
 public class Calculator {
 
-    public double add(double first, double second) {
-        return first + second;
+    public double add(double firstOperand, double secondOperand) {
+        return firstOperand + secondOperand;
     }
 
-    public double subtract(double first, double second) {
-        return first - second;
+    public double subtract(double firstOperand, double secondOperand) {
+        return firstOperand - secondOperand;
     }
 
-    public double multiply(double first, double second) {
-        return first * second;
+    public double multiply(double firstOperand, double secondOperand) {
+        return firstOperand * secondOperand;
     }
 
-    public double divide(int first, int second) {
-        if (second == 0) {
+    public double divide(int firstOperand, int secondOperand) {
+        if (secondOperand == 0) {
             throw new IllegalArgumentException("It's not possible dividing by 0");
         }
-        return (double) first / second;
+        return (double) firstOperand / secondOperand;
     }
 }

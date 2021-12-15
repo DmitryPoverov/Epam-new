@@ -1,18 +1,28 @@
 package com.epam.task1Calculator;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CalculatorTest {
 
-    private static final double DELTA = 0.00000001;
+    Calculator calculatorGlobal;
+    private static final double DELTA = 0;
+
+    @Before
+    public void beforeTestInitialisation() {
+        calculatorGlobal = new Calculator();
+    }
 
     @Test
     public void testShouldAddWhenSixAndTwoThenReturnEight() {
         //given
-        Calculator calculator = new Calculator();
+        //this is the full write of "given" block, without of @before method.
+        Calculator calculatorLocal = new Calculator();
+        int firstOperand = 6;
+        int secondOperand = 2;
         //when
-        double result = calculator.add(6, 2);
+        double result = calculatorLocal.add(firstOperand, secondOperand);
         //then
         Assert.assertEquals(result, 8, DELTA);
     }
@@ -20,9 +30,12 @@ public class CalculatorTest {
     @Test
     public void testShouldAddWhenMinusThreeAndMinusTwoThenReturnMinusFive() {
         //given
-        Calculator calculator = new Calculator();
+        //this is also a full write of "given" block, without the @before method.
+        Calculator calculatorLocal = new Calculator();
+        int firstOperand = -3;
+        int secondOperand = -2;
         //when
-        double result = calculator.add(-3, -2);
+        double result = calculatorLocal.add(firstOperand, secondOperand);
         //then
         Assert.assertEquals(result, -5, DELTA);
     }
@@ -30,9 +43,10 @@ public class CalculatorTest {
     @Test
     public void testShouldSubtractWhenThreeAndTwoThenReturnOne() {
         //given
-        Calculator calculator = new Calculator();
+        //this is a shorter write of "given" block, calculatorGlobal Installed here, without the @before method.
+        calculatorGlobal = new Calculator();
         //when
-        double result = calculator.subtract(3, 2);
+        double result = calculatorGlobal.subtract(3, 2);
         //then
         Assert.assertEquals(result, 1, DELTA);
     }
@@ -40,9 +54,10 @@ public class CalculatorTest {
     @Test
     public void testShouldSubtractWhenThirteenAndTenThenReturnOne() {
         //given
-        Calculator calculator = new Calculator();
+        //this is also a shorter write of "given" block, without the @before method.
+        calculatorGlobal = new Calculator();
         //when
-        double result = calculator.subtract(13, 10);
+        double result = calculatorGlobal.subtract(13, 10);
         //then
         Assert.assertEquals(result, 3, DELTA);
     }
@@ -50,9 +65,9 @@ public class CalculatorTest {
     @Test
     public void testShouldMultiplyWhenTwoAndThreeThenReturnSix() {
         //given
-        Calculator calculator = new Calculator();
+        //this is the shortest write of "given" block, with the @before method.
         //when
-        double result = calculator.multiply(2, 3);
+        double result = calculatorGlobal.multiply(2, 3);
         //then
         Assert.assertEquals(result, 6, DELTA);
     }
@@ -60,9 +75,9 @@ public class CalculatorTest {
     @Test
     public void testShouldMultiplyWhenTwoAndEightThenReturnSixteen() {
         //given
-        Calculator calculator = new Calculator();
+        //this is also the shortest write of "given" block, with the @before method.
         //when
-        double result = calculator.multiply(2, 8);
+        double result = calculatorGlobal.multiply(2, 8);
         //then
         Assert.assertEquals(result, 16, DELTA);
     }
@@ -70,9 +85,9 @@ public class CalculatorTest {
     @Test
     public void testShouldDivideWhenTenAndTwoThenReturnFive() {
         //given
-        Calculator calculator = new Calculator();
+        //this is also the shortest write of "given" block, with the @before method.
         //when
-        double result = calculator.divide(10, 2);
+        double result = calculatorGlobal.divide(10, 2);
         //then
         Assert.assertEquals(result, 5, DELTA);
     }
@@ -80,9 +95,9 @@ public class CalculatorTest {
     @Test
     public void testShouldDivideWhenMinusTwelveAndFourThenReturnMinusThree() {
         //given
-        Calculator calculator = new Calculator();
+        //this is also the shortest write of "given" block, with the @before method.
         //when
-        double result = calculator.divide(-12, 4);
+        double result = calculatorGlobal.divide(-12, 4);
         //then
         Assert.assertEquals(result, -3, DELTA);
     }
@@ -90,9 +105,9 @@ public class CalculatorTest {
     @Test(expected = IllegalArgumentException.class)
     public void testShouldThrowExceptionWhenSecondOperandIsZero() {
         //given
-        Calculator calculator = new Calculator();
+        //this is also the shortest write of "given" block, with the @before method.
         //when
-        calculator.divide(4, 0);
+        calculatorGlobal.divide(4, 0);
         //then
         //I don't know what's the "then" here.
     }
