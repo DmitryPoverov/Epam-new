@@ -1,4 +1,4 @@
-package com.epam.task1;
+package com.epam.task1Calculator;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShouldAddWhenMinusThreeAndMinusTwoThenReturnMinusThree() {
+    public void testShouldAddWhenMinusThreeAndMinusTwoThenReturnMinusFive() {
         //given
         Calculator calculator = new Calculator();
         //when
