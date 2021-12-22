@@ -1,2 +1,0 @@
-[INFO ] 2021-12-22 12:45:38.935 [main] ConeCreator - Started creating a cone from inputData: 1 2 3 4 5
-[INFO ] 2021-12-22 12:45:38.940 [main] ConeCreator - A Cone from input data is Cone{center=com.epam.task2.geometry.entities.Point@600c0000, coneRadius=1.0, coneHeight=2.0}
