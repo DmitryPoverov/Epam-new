@@ -1,0 +1,66 @@
+<xs:schema attributeFormDefault="unqualified" targetNamespace="test" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="touristVouchers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="familyVoucher">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="type"/>
+                            <xs:element type="xs:string" name="country"/>
+                            <xs:element type="xs:byte" name="numberOfDays"/>
+                            <xs:element type="xs:string" name="transport"/>
+                            <xs:element name="hotelCharacteristics">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:byte" name="numOfStars"/>
+                                        <xs:element name="mealsIncluded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="type"/>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:string" name="available"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element type="xs:string" name="roomType"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element type="xs:short" name="cost"/>
+                            <xs:element type="xs:byte" name="numOfFamilyMembers"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="id"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="businessVoucher">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="type"/>
+                            <xs:element type="xs:string" name="country"/>
+                            <xs:element type="xs:byte" name="numberOfDays"/>
+                            <xs:element type="xs:string" name="transport"/>
+                            <xs:element name="hotelCharacteristics">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:byte" name="numOfStars"/>
+                                        <xs:element name="mealsIncluded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="mealType"/>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:string" name="available"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element type="xs:string" name="roomType"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element type="xs:short" name="cost"/>
+                            <xs:element type="xs:byte" name="numOfMeetings"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="id"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
