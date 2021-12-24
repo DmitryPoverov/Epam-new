@@ -16,7 +16,6 @@ import java.io.IOException;
 
 public class VouchersValidator {
     private static final Logger LOGGER = LogManager.getLogger(VouchersValidator.class);
-
     public static void main(String[] args) {
         VouchersValidator test = new VouchersValidator();
         test.isValid("src/main/resources/vouchers.xml", "src/main/resources/vouchersSchema.xsd");
@@ -36,7 +35,6 @@ public class VouchersValidator {
             Validator validator = schema.newValidator();
             VouchersErrorHandler errorHandler = new VouchersErrorHandler();
             validator.setErrorHandler(errorHandler);
-
             validator.validate(source);
 
             if (errorHandler.isErrorHappened()) {

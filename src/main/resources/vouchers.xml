@@ -3,15 +3,15 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="test vouchersSchema.xsd">
 
-    <familyVoucher id="1">
+    <familyVoucher id="11">
         <type>Weekend</type>
         <country>Mexico</country>
         <numberOfDays>10</numberOfDays>
         <transport>bus</transport>
         <hotelCharacteristics>
-            <numOfStars>5</numOfStars>
+            <numberOfStars>5</numberOfStars>
             <mealsIncluded available="true">
-                <type>AI</type>
+                <mealType>AI</mealType>
             </mealsIncluded>
             <roomType>triple</roomType>
         </hotelCharacteristics>
@@ -19,13 +19,13 @@
         <numOfFamilyMembers>3</numOfFamilyMembers>
     </familyVoucher>
 
-    <businessVoucher id="2">
+    <businessVoucher id="22">
         <type>Business</type>
         <country>USA</country>
         <numberOfDays>2</numberOfDays>
         <transport>airplane</transport>
         <hotelCharacteristics>
-            <numOfStars>4</numOfStars>
+            <numberOfStars>4</numberOfStars>
             <mealsIncluded available="true">
                 <mealType>BB</mealType>
             </mealsIncluded>
