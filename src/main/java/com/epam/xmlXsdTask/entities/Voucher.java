@@ -61,12 +61,12 @@ public class Voucher {
 
         @Override
         public String toString() {
-            return  "id=" + id + ", \n" +
-                    "type=" + type + ", \n" +
-                    "country=" + country + ", \n" +
-                    "numberOfDays=" + numberOfDays + ", \n" +
-                    "transport=" + transport + ", \n" +
-                    "hotelCharacteristics: \n" + hotelCharacteristics.toString() + ", \n" +
-                    "cost=" + cost;
+            return  "\tid = " + id + ", \n" +
+                    "\ttype = " + type + ", \n" +
+                    "\tcountry = " + country + ", \n" +
+                    "\tnumberOfDays = " + numberOfDays + ", \n" +
+                    "\ttransport = " + transport + ", \n" +
+                    hotelCharacteristics + ", \n" +
+                    "\tcost = " + cost;
         }
     }

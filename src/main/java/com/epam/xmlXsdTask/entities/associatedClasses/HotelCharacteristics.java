@@ -32,9 +32,9 @@ public class HotelCharacteristics {
 
     @Override
     public String toString() {
-        return  "   	[HotelCharacteristicsData: \n" +
-                "	numOfStars=" + numOfStars + ", \n" +
-                "	mealsIncluded: \n" + mealsIncluded.toString() + ", \n" +
-                "	roomType=" + roomType + "]";
+        return  "\t\t[HotelCharacteristics: \n" +
+                "\t\tnumOfStars = " + numOfStars + ", \n" +
+                mealsIncluded + ", \n" +
+                "\t\troomType = " + roomType.toString().toLowerCase() + "]";
     }
 }

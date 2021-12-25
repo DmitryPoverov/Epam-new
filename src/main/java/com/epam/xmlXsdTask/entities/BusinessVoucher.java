@@ -16,8 +16,8 @@ public class BusinessVoucher extends Voucher {
 
     @Override
     public String toString() {
-        return "BusinessVoucher object: \n" +
+        return "[BusinessVoucher object: \n" +
                 super.toString() + " \n" +
-                "numOfMeetings=" + numOfMeetings;
+                "numOfMeetings=" + numOfMeetings + "]";
     }
 }

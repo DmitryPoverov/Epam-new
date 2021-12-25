@@ -1,9 +1,9 @@
 package com.epam.xmlXsdTask.parsers;
 
 import com.epam.xmlXsdTask.entities.Voucher;
-import com.epam.xmlXsdTask.entities.TouristVouchers;
-import com.epam.xmlXsdTask.exceptoin.ParserException;
 import com.epam.xmlXsdTask.handler.SaxParserHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.SAXParser;
@@ -12,14 +12,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class XmlSaxParser implements Parser{
+public class XmlSaxParser implements Parser {
+
+    private static final Logger LOGGER = LogManager.getLogger(XmlSaxParser.class);
 
     @Override
-    public List<Voucher> parse(String filePath) throws ParserException {
-        return null;
-    }
-
-    public TouristVouchers parse() {
+    public List<Voucher> parse(String filePath) {
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SaxParserHandler handler = new SaxParserHandler();
@@ -28,22 +26,20 @@ public class XmlSaxParser implements Parser{
         try {
             parser = factory.newSAXParser();
         } catch (Exception e) {
-            System.out.println("Open sax parser error" + e);
-            return null;
+            LOGGER.error("Open sax parser error" + e);
         }
 
-        File file = new File("src/main/resources/vouchers.xml");
+        File file = new File(filePath);
 
         try {
-            parser.parse(file, handler);
+            if (parser != null) {
+                parser.parse(file, handler);
+            }
         } catch (SAXException e) {
-            System.out.println("Sax parsing error" + e);
-            return null;
+            LOGGER.error("Sax parsing error" + e);
         } catch (IOException e) {
-            System.out.println("IO parsing error" + e);
-            return null;
+            System.out.println("IO sax parsing error" + e);
         }
-
-        return handler.getTouristVouchers();
+        return handler.getVouchers();
     }
 }

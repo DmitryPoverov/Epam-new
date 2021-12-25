@@ -16,8 +16,8 @@ public class FamilyVoucher extends Voucher {
 
     @Override
     public String toString() {
-        return "FamilyTrip object: \n" +
+        return "[FamilyTrip object: \n" +
                 super.toString() + " \n" +
-                "numOfMeetings=" + numOfFamilyMembers;
+                "numOfMeetings=" + numOfFamilyMembers + "]";
     }
 }

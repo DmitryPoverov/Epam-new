@@ -18,9 +18,9 @@ public enum Tags {
     TAG_NUMBER_OF_FAMILY_MEMBERS("numOfFamilyMembers"),
     TAG_NUMBER_OF_MEETINGS("numOfMeetings");
 
-    private String data;
+    private final String data;
 
-    private Tags(String data) {
+    Tags(String data) {
         this.data = data;
     }
 
@@ -30,9 +30,5 @@ public enum Tags {
 
     public String getData() {
         return data;
-    }
-
-    public void setName(String data) {
-        this.data = data;
     }
 }

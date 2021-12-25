@@ -30,8 +30,8 @@ public class MealsIncluded {
 
     @Override
     public String toString() {
-        return "		[MealsIncludedData: \n" +
-                "		available=" + available + ", \n" +
-                "		mealType=" + mealType + "]";
+        return "\t\t\t[MealsIncluded: \n" +
+                "\t\t\tavailable = " + available + ", \n" +
+                "\t\t\tmealType = " + mealType + "]";
     }
 }
