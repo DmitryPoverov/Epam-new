@@ -3,14 +3,27 @@ package com.epam.xmlXsdTask.entities;
 import com.epam.xmlXsdTask.entities.associatedClasses.HotelCharacteristics;
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.Type;
 
-public class Voucher {
-        private int id;
-        private Type type;
-        private String country;
-        private int numberOfDays;
-        private String transport;
-        private HotelCharacteristics hotelCharacteristics;
-        private int cost;
+import javax.xml.bind.annotation.*;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Voucher", propOrder = {"id", "type", "country", "numberOfDays", "transport", "hotelCharacteristics", "cost"})
+@XmlSeeAlso({FamilyVoucher.class, BusinessVoucher.class})
+public abstract class Voucher {
+    @XmlAttribute(name = "id")
+    private int id;
+    @XmlElement(namespace = "test")
+    private Type type;
+    @XmlElement(namespace = "test")
+    private String country;
+    @XmlElement(namespace = "test")
+    private int numberOfDays;
+    @XmlElement(namespace = "test")
+    private String transport;
+    @XmlElement(namespace = "test")
+    private HotelCharacteristics hotelCharacteristics;
+    @XmlElement(namespace = "test")
+    private int cost;
 
         public Voucher() {
         }

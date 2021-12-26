@@ -3,6 +3,7 @@ package com.epam.xmlXsdTask.runner;
 import com.epam.xmlXsdTask.entities.Voucher;
 import com.epam.xmlXsdTask.exceptoin.ParserException;
 import com.epam.xmlXsdTask.parsers.XmlDomParser;
+import com.epam.xmlXsdTask.parsers.XmlJaxbParser;
 import com.epam.xmlXsdTask.parsers.XmlSaxParser;
 
 import java.util.List;
@@ -29,6 +30,18 @@ public class Runner {
         XmlSaxParser xmlSaxParser = new XmlSaxParser();
         parseList = xmlSaxParser.parse(FILE_PATH);
         for (Voucher i : parseList) {
+            System.out.println(i);
+        }
+
+        System.out.println("\n3) Xml JAXB Parser:");
+        XmlJaxbParser xmlJaxbParser = new XmlJaxbParser();
+        List<Voucher> lisTouristVouchers = null;
+        try {
+            lisTouristVouchers = xmlJaxbParser.parse(FILE_PATH);
+        } catch (ParserException e) {
+            e.printStackTrace();
+        }
+        for (Voucher i : lisTouristVouchers) {
             System.out.println(i);
         }
     }
