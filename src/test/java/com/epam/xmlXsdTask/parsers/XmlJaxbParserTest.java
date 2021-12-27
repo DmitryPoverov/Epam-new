@@ -20,47 +20,15 @@ public class XmlJaxbParserTest {
     private static final String VALID_PATH = "src/main/resources/vouchers.xml";
 
     @Test
-    public void TestParseShouldParseFileWhenPathIsValid() throws ParserException {
+    public void TestParserShouldParseFileWhenPathIsValid() throws ParserException {
         //given
-        FamilyVoucher familyVoucher = new FamilyVoucher();
-        familyVoucher.setId(1);
-        familyVoucher.setType(Type.WEEKEND);
-        familyVoucher.setCountry("Mexico");
-        familyVoucher.setNumberOfDays(10);
-        familyVoucher.setTransport("bus");
+        MealsIncluded mealsFV = new MealsIncluded(true, MealType.AI);
+        HotelCharacteristics charactersFV = new HotelCharacteristics(5, mealsFV, RoomType.TRIPLE);
+        FamilyVoucher familyVoucher = new FamilyVoucher(1, Type.WEEKEND, "Mexico", 10, "bus", charactersFV, 500, 3);
 
-        MealsIncluded mealsIncluded = new MealsIncluded();
-        mealsIncluded.setAvailable(true);
-        mealsIncluded.setMealType(MealType.AI);
-
-        HotelCharacteristics hotelCharacteristics = new HotelCharacteristics();
-        hotelCharacteristics.setNumOfStars(5);
-        hotelCharacteristics.setMealsIncluded(mealsIncluded);
-        hotelCharacteristics.setRoomType(RoomType.TRIPLE);
-
-        familyVoucher.setHotelCharacteristics(hotelCharacteristics);
-        familyVoucher.setCost(500);
-        familyVoucher.setNumOfFamilyMembers(3);
-
-        BusinessVoucher businessVoucher = new BusinessVoucher();
-        businessVoucher.setId(2);
-        businessVoucher.setType(Type.BUSINESS);
-        businessVoucher.setCountry("USA");
-        businessVoucher.setNumberOfDays(2);
-        businessVoucher.setTransport("airplane");
-
-        MealsIncluded mealsIncluded1 = new MealsIncluded();
-        mealsIncluded1.setAvailable(true);
-        mealsIncluded1.setMealType(MealType.BB);
-
-        HotelCharacteristics hotelCharacteristics1 = new HotelCharacteristics();
-        hotelCharacteristics1.setNumOfStars(4);
-        hotelCharacteristics1.setMealsIncluded(mealsIncluded1);
-        hotelCharacteristics1.setRoomType(RoomType.DOUBLE);
-
-        businessVoucher.setHotelCharacteristics(hotelCharacteristics1);
-        businessVoucher.setCost(1000);
-        businessVoucher.setNumOfMeetings(2);
+        MealsIncluded mealsBV = new MealsIncluded(true, MealType.BB);
+        HotelCharacteristics charactersBV = new HotelCharacteristics(4, mealsBV, RoomType.DOUBLE);
+        BusinessVoucher businessVoucher = new BusinessVoucher(2, Type.BUSINESS, "USA", 2, "airplane", charactersBV, 1000, 2);
 
         XmlSaxParser xmlSaxParser = new XmlSaxParser();
         List<Voucher> expected = Arrays.asList(familyVoucher, businessVoucher);

@@ -1,5 +1,8 @@
 package com.epam.xmlXsdTask.entities;
 
+import com.epam.xmlXsdTask.entities.associatedClasses.HotelCharacteristics;
+import com.epam.xmlXsdTask.entities.associatedClasses.enums.Type;
+
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "BusinessVoucher", namespace = "test")
@@ -12,6 +15,11 @@ public class BusinessVoucher extends Voucher{
     public BusinessVoucher() {
     }
 
+    public BusinessVoucher(int id, Type type, String country, int days, String transport, HotelCharacteristics characteristics, int cost, int meetings) {
+        super(id, type, country, days, transport, characteristics, cost);
+        this.numOfMeetings = meetings;
+    }
+
     public void setNumOfMeetings(int numOfMeetings) {
         this.numOfMeetings = numOfMeetings;
     }
@@ -22,9 +30,9 @@ public class BusinessVoucher extends Voucher{
 
     @Override
     public String toString() {
-        return "[BusinessVoucher object: \n" +
+        return "\t[BusinessVoucher object: \n" +
                 super.toString() + " \n" +
-                "numOfMeetings=" + numOfMeetings + "]";
+                "\tmeetings = " + numOfMeetings + "]";
     }
 
     @Override

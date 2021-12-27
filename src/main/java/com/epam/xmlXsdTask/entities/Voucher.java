@@ -28,7 +28,17 @@ public abstract class Voucher {
         public Voucher() {
         }
 
-        public int getId() {
+    public Voucher(int id, Type type, String country, int numberOfDays, String transport, HotelCharacteristics hotelCharacteristics, int cost) {
+        this.id = id;
+        this.type = type;
+        this.country = country;
+        this.numberOfDays = numberOfDays;
+        this.transport = transport;
+        this.hotelCharacteristics = hotelCharacteristics;
+        this.cost = cost;
+    }
+
+    public int getId() {
             return id;
         }
         public Type getType() {

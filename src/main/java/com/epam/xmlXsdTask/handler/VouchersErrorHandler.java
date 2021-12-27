@@ -18,13 +18,11 @@ public class VouchersErrorHandler extends DefaultHandler {
     public void error(SAXParseException e) {
         LOGGER.log(Level.ERROR, getLineAddress(e) + " - " + e.getMessage());
         isError = true;
-
     }
 
     public void fatalError(SAXParseException e) {
         LOGGER.log(Level.FATAL, getLineAddress(e) + " - " + e.getMessage());
         isError = true;
-
     }
 
     private String getLineAddress(SAXParseException e) {
@@ -34,5 +32,4 @@ public class VouchersErrorHandler extends DefaultHandler {
     public boolean isErrorHappened() {
         return isError;
     }
-
 }

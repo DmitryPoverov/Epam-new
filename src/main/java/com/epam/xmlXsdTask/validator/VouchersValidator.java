@@ -42,11 +42,10 @@ public class VouchersValidator {
             LOGGER.info(String.format("File %s is valid.", xmlPath));
 
         } catch (SAXException | IOException | NullPointerException e) {
-            LOGGER.info(String.format("File %s is not valid.", xmlPath), e);
+            LOGGER.info(String.format("File %s is not valid.", xmlPath));
             isValid = false;
             throw new ParserException(e.toString());
         }
-
         return isValid;
     }
 }

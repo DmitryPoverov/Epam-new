@@ -12,9 +12,13 @@ public class TouristVouchers {
             @XmlElement(name = "familyVoucher", namespace = "test", type = FamilyVoucher.class),
             @XmlElement(name = "businessVoucher", namespace = "test", type = BusinessVoucher.class),
     })
-    private final List<Voucher> list = new ArrayList<>();
+    private List<Voucher> list = new ArrayList<>();
 
     public TouristVouchers() {
+    }
+
+    public void setList(List<Voucher> list) {
+        this.list = list;
     }
 
     public List<Voucher> getList() {

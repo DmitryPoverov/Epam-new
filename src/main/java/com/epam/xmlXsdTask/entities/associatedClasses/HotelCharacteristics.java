@@ -18,6 +18,12 @@ public class HotelCharacteristics {
     public HotelCharacteristics() {
     }
 
+    public HotelCharacteristics(int numOfStars, MealsIncluded mealsIncluded, RoomType roomType) {
+        this.numOfStars = numOfStars;
+        this.mealsIncluded = mealsIncluded;
+        this.roomType = roomType;
+    }
+
     public void setNumOfStars(int numOfStars) {
         this.numOfStars = numOfStars;
     }
