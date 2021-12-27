@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<touristVouchers xmlns="test"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="test vouchersSchema.xsd">
+
+    <familyVoucher id="1">
+        <type>Weekend</type>
+        <country>Mexico</country>
+        <numberOfDays>10</numberOfDays>
+        <transport>bus</transport>
+        <hotelCharacteristics>
+            <numberOfStars>5</numberOfStars>
+            <mealsIncluded available="true">
+                <mealType>AI</mealType>
+            </mealsIncluded>
+            <roomType>triple</roomType>
+        </hotelCharacteristics>
+        <cost>500</cost>
+        <numOfFamilyMembers>3</numOfFamilyMembers>
+    </familyVoucher>
+
+    <businessVoucher id="2">
+        <type>Business</type>
+        <country>USA</country>
+        <numberOfDays>2</numberOfDays>
+        <transport>airplane</transport>
+        <hotelCharacteristics>
+            <numberOfStars>4</numberOfStars>
+            <mealsIncluded available="true">
+                <mealType>BB</mealType>
+            </mealsIncluded>
+            <roomType>double</roomType>
+        </hotelCharacteristics>
+        <cost>1000</cost>
+        <numOfMeetings>2</numOfMeetings>
+    </businessVoucher>
+
+</touristVouchers>
