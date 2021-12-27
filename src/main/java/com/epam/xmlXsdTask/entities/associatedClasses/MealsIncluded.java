@@ -23,6 +23,13 @@ public class MealsIncluded {
         this.mealType = mealType;
     }
 
+    public boolean getAvailable() {
+        return available;
+    }
+    public MealType getMealType() {
+        return mealType;
+    }
+
     @Override
     public String toString() {
         return "\t\t\t[MealsIncluded: \n" +

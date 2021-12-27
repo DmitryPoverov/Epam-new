@@ -16,6 +16,10 @@ public class BusinessVoucher extends Voucher{
         this.numOfMeetings = numOfMeetings;
     }
 
+    public int getNumOfMeetings() {
+        return numOfMeetings;
+    }
+
     @Override
     public String toString() {
         return "[BusinessVoucher object: \n" +

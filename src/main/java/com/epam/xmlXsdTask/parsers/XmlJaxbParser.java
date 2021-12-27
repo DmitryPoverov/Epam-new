@@ -23,7 +23,7 @@ public class XmlJaxbParser implements Parser {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             FileReader reader = new FileReader(filePath);
             TouristVouchers touristVouchers = (TouristVouchers) unmarshaller.unmarshal(reader);
-            listOfVouchers = touristVouchers.getListOfVouchers();
+            listOfVouchers = touristVouchers.getList();
 
         } catch (JAXBException | FileNotFoundException e) {
             throw new ParserException("Jaxb parsing exception", e);

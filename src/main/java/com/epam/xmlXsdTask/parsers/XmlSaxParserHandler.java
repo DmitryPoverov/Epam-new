@@ -17,7 +17,7 @@ import java.util.List;
 
 import static com.epam.xmlXsdTask.entities.associatedClasses.enums.Tags.*;
 
-public class SaxParserHandler extends DefaultHandler {
+public class XmlSaxParserHandler extends DefaultHandler {
 
     public List<Voucher> vouchers = new ArrayList<>();
 

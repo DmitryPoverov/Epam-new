@@ -5,7 +5,7 @@ import com.epam.xmlXsdTask.entities.associatedClasses.enums.Type;
 
 import javax.xml.bind.annotation.*;
 
-
+@XmlRootElement(name = "Voucher", namespace = "test")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Voucher", propOrder = {"id", "type", "country", "numberOfDays", "transport", "hotelCharacteristics", "cost"})
 @XmlSeeAlso({FamilyVoucher.class, BusinessVoucher.class})

@@ -19,7 +19,7 @@ public class XmlSaxParser implements Parser {
     public List<Voucher> parse(String filePath) {
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
-        SaxParserHandler handler = new SaxParserHandler();
+        XmlSaxParserHandler handler = new XmlSaxParserHandler();
         SAXParser parser = null;
 
         try {

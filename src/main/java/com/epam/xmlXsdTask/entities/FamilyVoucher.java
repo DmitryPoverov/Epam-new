@@ -12,12 +12,12 @@ public class FamilyVoucher extends Voucher {
     public FamilyVoucher() {
     }
 
-    public int getNumOfFamilyMembers() {
-        return numOfFamilyMembers;
-    }
-
     public void setNumOfFamilyMembers(int numOfFamilyMembers) {
         this.numOfFamilyMembers = numOfFamilyMembers;
+    }
+
+    public int getNumOfFamilyMembers() {
+        return numOfFamilyMembers;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.epam.xmlXsdTask.validator;
 
-import com.epam.xmlXsdTask.handler.VouchersErrorHandler;
+import com.epam.xmlXsdTask.handler.VoucherErrorHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
@@ -33,7 +33,7 @@ public class VouchersValidator {
             Source source = new StreamSource(xmlPath);
 
             Validator validator = schema.newValidator();
-            VouchersErrorHandler errorHandler = new VouchersErrorHandler();
+            VoucherErrorHandler errorHandler = new VoucherErrorHandler();
             validator.setErrorHandler(errorHandler);
             validator.validate(source);
 

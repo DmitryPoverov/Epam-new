@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Director {
-    private Parser parser;
-    private VouchersValidator vouchersValidator;
+    private final Parser parser;
+    private final VouchersValidator vouchersValidator;
 
     public Director(Parser parser, VouchersValidator vouchersValidator) {
         this.parser = parser;

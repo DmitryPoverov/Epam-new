@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class VouchersErrorHandler extends DefaultHandler {
-	 private static final Logger LOGGER = LogManager.getLogger(VouchersErrorHandler.class);
+public class VoucherErrorHandler extends DefaultHandler {
+	 private static final Logger LOGGER = LogManager.getLogger(VoucherErrorHandler.class);
     private boolean isError = false;
 
     public void warning(SAXParseException e) {
@@ -18,13 +18,11 @@ public class VouchersErrorHandler extends DefaultHandler {
     public void error(SAXParseException e) {
         LOGGER.log(Level.ERROR, getLineAddress(e) + " - " + e.getMessage());
         isError = true;
-
     }
 
     public void fatalError(SAXParseException e) {
         LOGGER.log(Level.FATAL, getLineAddress(e) + " - " + e.getMessage());
         isError = true;
-
     }
 
     private String getLineAddress(SAXParseException e) {
@@ -34,5 +32,4 @@ public class VouchersErrorHandler extends DefaultHandler {
     public boolean isErrorHappened() {
         return isError;
     }
-
 }

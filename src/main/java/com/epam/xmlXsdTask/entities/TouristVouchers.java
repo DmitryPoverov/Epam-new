@@ -14,7 +14,10 @@ public class TouristVouchers {
     })
     private final List<Voucher> list = new ArrayList<>();
 
-    public List<Voucher> getListOfVouchers() {
+    public TouristVouchers() {
+    }
+
+    public List<Voucher> getList() {
         return list;
     }
 }

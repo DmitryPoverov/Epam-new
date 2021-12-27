@@ -28,6 +28,16 @@ public class HotelCharacteristics {
         this.roomType = roomType;
     }
 
+    public int getNumOfStars() {
+        return numOfStars;
+    }
+    public MealsIncluded getMealsIncluded() {
+        return mealsIncluded;
+    }
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
     @Override
     public String toString() {
         return  "\t\t[HotelCharacteristics: \n" +
