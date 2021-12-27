@@ -8,13 +8,14 @@ import com.epam.xmlXsdTask.entities.associatedClasses.MealsIncluded;
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.MealType;
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.RoomType;
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.Type;
+import com.epam.xmlXsdTask.entities.associatedClasses.enums.Tags;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.xmlXsdTask.entities.associatedClasses.tags.Tags.*;
+import static com.epam.xmlXsdTask.entities.associatedClasses.enums.Tags.*;
 
 public class SaxParserHandler extends DefaultHandler {
 
@@ -37,113 +38,77 @@ public class SaxParserHandler extends DefaultHandler {
 
         currentTagName = qName;
 
-        if (currentTagName == null) {
-            return;
+        if (currentTagName != null) {
+            if(currentTagName.equals(getData(TAG_FAMILY_VOUCHER))) {
+                currentVoucher = new FamilyVoucher();
+                currentVoucher.setId(Integer.parseInt(attributes.getValue("id")));
+                insideFamilyVoucherTag = true;
+            } else if (currentTagName.equals(getData(TAG_BUSINESS_VOUCHER))) {
+                currentVoucher = new BusinessVoucher();
+                currentVoucher.setId(Integer.parseInt(attributes.getValue("id")));
+                insideBusinessVoucherTag = true;
+            } else if (currentTagName.equals(getData(TAG_MEALS_INCLUDED))) {
+                mealsIncluded.setAvailable(Boolean.parseBoolean(attributes.getValue("available")));
+            }
         }
-
-        if(currentTagName.equals(getData(TAG_FAMILY_VOUCHER))) {
-            currentVoucher = new FamilyVoucher();
-            currentVoucher.setId(Integer.parseInt(attributes.getValue("id")));
-            insideFamilyVoucherTag = true;
-        }
-
-        if (currentTagName.equals(getData(TAG_BUSINESS_VOUCHER))) {
-            currentVoucher = new BusinessVoucher();
-            currentVoucher.setId(Integer.parseInt(attributes.getValue("id")));
-            insideBusinessVoucherTag = true;
-        }
-
-        if (currentTagName.equals(getData(TAG_MEALS_INCLUDED))) {
-            mealsIncluded.setAvailable(Boolean.parseBoolean(attributes.getValue("available")));
-        }
-
     }
 
     @Override
     public void endElement(String uri, String localName, String qName){
 
-        if (qName == null) {
-            return;
+        if (qName != null) {
+            if (qName.equals(getData(TAG_FAMILY_VOUCHER))) {
+                insideFamilyVoucherTag = false;
+                vouchers.add(currentVoucher);
+            } else if (qName.equals(getData(TAG_BUSINESS_VOUCHER))) {
+                insideBusinessVoucherTag = false;
+                vouchers.add(currentVoucher);
+            }
+            currentTagName = null;
         }
-
-        if (qName.equals(getData(TAG_FAMILY_VOUCHER))) {
-            insideFamilyVoucherTag = false;
-            vouchers.add(currentVoucher);
-        }
-
-        if (qName.equals(getData(TAG_BUSINESS_VOUCHER))) {
-            insideBusinessVoucherTag = false;
-            vouchers.add(currentVoucher);
-        }
-        currentTagName = null;
-    }//endElement
+    }
 
     @Override
     public void characters(char[] ch, int start, int length) {
-
         String tagData = new String (ch, start, length);
 
-        if (currentTagName == null) {
-            return;
-        }
-
-        processingCommonTags(currentTagName, tagData);
-
-        if (insideFamilyVoucherTag) {
-            FamilyVoucher familyVoucher = (FamilyVoucher) currentVoucher;
-
-            if (currentTagName.equals(getData(TAG_NUMBER_OF_FAMILY_MEMBERS))) {
-                familyVoucher.setNumOfFamilyMembers(Integer.parseInt(tagData));
+        if (currentTagName != null) {
+            processingCommonTags(currentTagName, tagData);
+            if (insideFamilyVoucherTag) {
+                FamilyVoucher familyVoucher = (FamilyVoucher) currentVoucher;
+                if (currentTagName.equals(Tags.getData(TAG_NUMBER_OF_FAMILY_MEMBERS))) {
+                    familyVoucher.setNumOfFamilyMembers(Integer.parseInt(tagData));
+                }
+            } else if (insideBusinessVoucherTag) {
+                BusinessVoucher businessVoucher = (BusinessVoucher) currentVoucher;
+                if (currentTagName.equals(Tags.getData(TAG_NUMBER_OF_MEETINGS))) {
+                    businessVoucher.setNumOfMeetings(Integer.parseInt(tagData));
+                }
             }
         }
-
-        if (insideBusinessVoucherTag) {
-            BusinessVoucher businessVoucher = (BusinessVoucher) currentVoucher;
-
-            if (currentTagName.equals(getData(TAG_NUMBER_OF_MEETINGS))) {
-                businessVoucher.setNumOfMeetings(Integer.parseInt(tagData));
-            }
-        }
-
-    }//characters
+    }
 
     private void processingCommonTags(String currentTagName, String tagData) {
-
-        if (currentTagName.equals(getData(TAG_TYPE))) {
+        if (currentTagName.equals(Tags.getData(TAG_TYPE))) {
             currentVoucher.setType(Type.valueOf(tagData.toUpperCase()));
-        }
-
-        if (currentTagName.equals(getData(TAG_COUNTRY))) {
+        } else if (currentTagName.equals(Tags.getData(TAG_COUNTRY))) {
             currentVoucher.setCountry(tagData);
-        }
-
-        if (currentTagName.equals(getData(TAG_NUMBER_OF_DAYS))) {
+        } else if (currentTagName.equals(Tags.getData(TAG_NUMBER_OF_DAYS))) {
             currentVoucher.setNumberOfDays(Integer.parseInt(tagData));
-        }
-
-        if (currentTagName.equals(getData(TAG_TRANSPORT))) {
+        } else if (currentTagName.equals(Tags.getData(TAG_TRANSPORT))) {
             currentVoucher.setTransport(tagData);
-        }
-
-        if (currentTagName.equals(getData(TAG_NUMBER_OF_STARS))) {
+        } else if (currentTagName.equals(Tags.getData(TAG_NUMBER_OF_STARS))) {
             hotelCharacteristics.setNumOfStars(Integer.parseInt(tagData));
-        }
-
-        if (currentTagName.equals(getData(TAG_MEAL_TYPE))) {
+        } else if (currentTagName.equals(Tags.getData(TAG_MEAL_TYPE))) {
             mealsIncluded.setMealType(MealType.valueOf(tagData.toUpperCase()));
             hotelCharacteristics.setMealsIncluded(mealsIncluded);
-        }
-
-        if (currentTagName.equals(getData(TAG_ROOM_TYPE))) {
+        } else if (currentTagName.equals(Tags.getData(TAG_ROOM_TYPE))) {
             hotelCharacteristics.setRoomType(RoomType.valueOf(tagData.toUpperCase()));
-        }
-
-        if (!currentTagName.equals(getData(TAG_TOURIST_VOUCHERS))) {
+        } else if (!currentTagName.equals(Tags.getData(TAG_TOURIST_VOUCHERS))) {
             currentVoucher.setHotelCharacteristics(hotelCharacteristics);
         }
-
-        if (currentTagName.equals(getData(TAG_COST))) {
+        if (currentTagName.equals(Tags.getData(TAG_COST))) {
             currentVoucher.setCost(Integer.parseInt(tagData));
         }
-    }//processingCommonTags
-}//SaxParserHandler
+    }
+}

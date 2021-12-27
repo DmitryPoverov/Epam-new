@@ -15,23 +15,23 @@ public class Runner {
     public static void main(String[] args) {
         List<Voucher> parseList;
 
-        System.out.println("\n1) Xml DOM Parser:");
-        XmlDomParser xmlDomParser = new XmlDomParser();
-        try {
-            parseList = xmlDomParser.parse(FILE_PATH);
-            for (Voucher i : parseList) {
-                System.out.println(i);
-            }
-        } catch (ParserException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("\n2) Xml SAX Parser:");
-        XmlSaxParser xmlSaxParser = new XmlSaxParser();
-        parseList = xmlSaxParser.parse(FILE_PATH);
-        for (Voucher i : parseList) {
-            System.out.println(i);
-        }
+//        System.out.println("\n1) Xml DOM Parser:");
+//        XmlDomParser xmlDomParser = new XmlDomParser();
+//        try {
+//            parseList = xmlDomParser.parse(FILE_PATH);
+//            for (Voucher i : parseList) {
+//                System.out.println(i);
+//            }
+//        } catch (ParserException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("\n2) Xml SAX Parser:");
+//        XmlSaxParser xmlSaxParser = new XmlSaxParser();
+//        parseList = xmlSaxParser.parse(FILE_PATH);
+//        for (Voucher i : parseList) {
+//            System.out.println(i);
+//        }
 
         System.out.println("\n3) Xml JAXB Parser:");
         XmlJaxbParser xmlJaxbParser = new XmlJaxbParser();
@@ -41,8 +41,10 @@ public class Runner {
         } catch (ParserException e) {
             e.printStackTrace();
         }
-        for (Voucher i : lisTouristVouchers) {
-            System.out.println(i);
+        if (lisTouristVouchers != null) {
+            for (Voucher i : lisTouristVouchers) {
+                System.out.println(i);
+            }
         }
     }
 }

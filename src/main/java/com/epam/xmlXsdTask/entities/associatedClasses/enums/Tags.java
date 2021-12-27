@@ -1,4 +1,4 @@
-package com.epam.xmlXsdTask.entities.associatedClasses.tags;
+package com.epam.xmlXsdTask.entities.associatedClasses.enums;
 
 public enum Tags {
 

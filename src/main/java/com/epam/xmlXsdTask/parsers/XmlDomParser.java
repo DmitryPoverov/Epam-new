@@ -1,5 +1,6 @@
 package com.epam.xmlXsdTask.parsers;
 
+import com.epam.xmlXsdTask.entities.associatedClasses.enums.Tags;
 import com.epam.xmlXsdTask.exceptoin.ParserException;
 import com.epam.xmlXsdTask.entities.BusinessVoucher;
 import com.epam.xmlXsdTask.entities.FamilyVoucher;
@@ -9,6 +10,8 @@ import com.epam.xmlXsdTask.entities.associatedClasses.MealsIncluded;
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.MealType;
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.RoomType;
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.Type;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -19,129 +22,90 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.xmlXsdTask.entities.associatedClasses.tags.Tags.*;
+import static com.epam.xmlXsdTask.entities.associatedClasses.enums.Tags.*;
 
 public class XmlDomParser implements Parser {
 
-    public static void main(String[] args) {
-        XmlDomParser xmlDomParser = new XmlDomParser();
-        try {
-            List<Voucher> touristVouchers = xmlDomParser.parse("src/main/resources/vouchers.xml");
-            for (Voucher iterator : touristVouchers) {
-                System.out.println(iterator);
-            }
-        } catch (ParserException e) {
-            e.printStackTrace();
-        }
-    }
-
+    private static final Logger LOGGER = LogManager.getLogger(XmlDomParser.class);
     @Override
-    public List<Voucher> parse(String filePath) throws ParserException {
-        /* Converting XML to DOM Object Model with Error Handling */
-        Document domObject = buildDocument(filePath);
-        /* Creating list of objects from XML input */
-        List<Voucher> listOfVouchers = new ArrayList<>();
+    public List<Voucher> parse(String filePath) {
 
-        /* Data processing */
+        Document domObject = buildDocument(filePath);           // Converting XML to DOM Object Model with Error Handling
+        List<Voucher> listOfVouchers = new ArrayList<>();       // list for inputting
+
         Node rootNode = domObject.getFirstChild();
         NodeList rootChildrenNodes = rootNode.getChildNodes();
         for (int i = 0; i < rootChildrenNodes.getLength(); i++) {
 
-            /* Variables for simplifying understanding */
             Node childNode = rootChildrenNodes.item(i);
             String childNodeName = childNode.getNodeName();
 
-            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_FAMILY_VOUCHER))) {
-                listOfVouchers.add(getInformationAboutFamilyVouchers(childNode));
-
-            }
-
-            if (childNodeName.equals(getData(TAG_BUSINESS_VOUCHER))) {
-                listOfVouchers.add(getInformationAboutBusinessVouchers(childNode));
+// Checking for not-empty elements
+            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+// Two ways for different vouchers
+                if (childNodeName.equals(getData(TAG_FAMILY_VOUCHER))) {
+                    listOfVouchers.add(getInformationAboutFamilyVouchers(childNode));
+                } else if (childNodeName.equals(getData(TAG_BUSINESS_VOUCHER))) {
+                    listOfVouchers.add(getInformationAboutBusinessVouchers(childNode));
+                }
             }
         }
         return listOfVouchers;
-
     }
 
     private static BusinessVoucher getInformationAboutBusinessVouchers(Node businessVoucherNode) {
 
-        /* BusinessVoucher object creation */
         BusinessVoucher businessVoucher = new BusinessVoucher();
-
-        /* Processing attributes */
+//Got businessVoucher attributes
         NamedNodeMap attributes = businessVoucherNode.getAttributes();
+//An only attribute and because index is 0
         String idAttribute = attributes.item(0).getTextContent();
+// Got id from attribute
         businessVoucher.setId(Integer.parseInt(idAttribute));
 
-        commonForAllTagsProcessing(businessVoucherNode, businessVoucher);
+        processAllCommonTags(businessVoucherNode, businessVoucher);
 
-        /* Avoiding loop reuse by getting the penultimate node */
-        Node penultimateNode = businessVoucherNode.getLastChild().getPreviousSibling();
-        if (penultimateNode.getNodeName().equalsIgnoreCase(getData(TAG_NUMBER_OF_MEETINGS))) {
-            businessVoucher.setNumOfMeetings((Integer.parseInt(penultimateNode.getTextContent())));
+        Node lastNode = businessVoucherNode.getLastChild().getPreviousSibling();
+        if (lastNode.getNodeName().equalsIgnoreCase(Tags.getData(TAG_NUMBER_OF_MEETINGS))) {
+            businessVoucher.setNumOfMeetings((Integer.parseInt(lastNode.getTextContent())));
         }
         return businessVoucher;
-
-    }// getInformationAboutBusinessVouchers
+    }
 
     private static HotelCharacteristics getHotelCharacteristics(Node hotelCharacteristicsNode) {
-        /* HotelCharacteristics class creation */
+
         HotelCharacteristics hotelCharacteristics = new HotelCharacteristics();
 
-        /* Processing hotelCharacteristicsNode children */
         NodeList hotelCharacteristicsChildren = hotelCharacteristicsNode.getChildNodes();
         for (int i = 0; i < hotelCharacteristicsChildren.getLength(); i++) {
 
-            /* Variables for simplifying understanding */
             Node childNode = hotelCharacteristicsChildren.item(i);
             String childNodeContent = hotelCharacteristicsChildren.item(i).getTextContent();
             String childNodeName = hotelCharacteristicsChildren.item(i).getNodeName();
 
-            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_NUMBER_OF_STARS))) {
-                hotelCharacteristics.setNumOfStars(Integer.parseInt(childNodeContent));
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_MEALS_INCLUDED))) {
-                hotelCharacteristics.setMealsIncluded(getInformationAboutMeals(childNode));
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_ROOM_TYPE))) {
-                if (childNodeContent.equalsIgnoreCase(RoomType.SINGLE.toString())) {
-                    hotelCharacteristics.setRoomType(RoomType.SINGLE);
-                    continue;
-                }
-
-                if (childNodeContent.equalsIgnoreCase(RoomType.DOUBLE.toString())) {
-                    hotelCharacteristics.setRoomType(RoomType.DOUBLE);
-                    continue;
-                }
-
-                if (childNodeContent.equalsIgnoreCase(RoomType.TRIPLE.toString())) {
-                    hotelCharacteristics.setRoomType(RoomType.TRIPLE);
+            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                if (childNodeName.equals(Tags.getData(TAG_NUMBER_OF_STARS))) {
+                    hotelCharacteristics.setNumOfStars(Integer.parseInt(childNodeContent));
+                } else if (childNodeName.equals(Tags.getData(TAG_MEALS_INCLUDED))) {
+                    hotelCharacteristics.setMealsIncluded(getInformationAboutMeals(childNode));
+                } else if (childNodeName.equals(Tags.getData(TAG_ROOM_TYPE))) {
+                    if (childNodeContent.equalsIgnoreCase(RoomType.SINGLE.toString())) {
+                        hotelCharacteristics.setRoomType(RoomType.SINGLE);
+                    } else if (childNodeContent.equalsIgnoreCase(RoomType.DOUBLE.toString())) {
+                        hotelCharacteristics.setRoomType(RoomType.DOUBLE);
+                    } else if (childNodeContent.equalsIgnoreCase(RoomType.TRIPLE.toString())) {
+                        hotelCharacteristics.setRoomType(RoomType.TRIPLE);
+                    }
                 }
             }
-        } // for
+        }
         return hotelCharacteristics;
-
-    }// getHotelCharacteristics
+    }
 
     private static MealsIncluded getInformationAboutMeals(Node hotelCharacteristicsChild) {
 
-        /* MealsIncluded class creation */
         MealsIncluded mealsIncluded = new MealsIncluded();
 
-        /* Processing attributes */
         NamedNodeMap attributes = hotelCharacteristicsChild.getAttributes();
         String trueAttribute = attributes.item(0).getTextContent();
 
@@ -150,120 +114,86 @@ public class XmlDomParser implements Parser {
             NodeList mealTypeNodesChildren = hotelCharacteristicsChild.getChildNodes();
             for (int i = 0; i < mealTypeNodesChildren.getLength(); i++) {
 
-                /* Variables for simplifying understanding */
                 Node childNode = mealTypeNodesChildren.item(i);
                 String childNodeContent = childNode.getTextContent();
                 String childNodeName = childNode.getNodeName();
 
-                if (childNode.getNodeType() != Node.ELEMENT_NODE) {
-                    continue;
-                }
-
-                if (childNodeName.equals(getData(TAG_MEAL_TYPE))) {
-                    if (childNodeContent.equalsIgnoreCase(MealType.AI.toString())) {
-                        mealsIncluded.setMealType(MealType.AI);
-                        continue;
-                    }
-                    if (childNodeContent.equalsIgnoreCase(MealType.BB.toString())) {
-                        mealsIncluded.setMealType(MealType.BB);
-                        continue;
-                    }
-                    if (childNodeContent.equalsIgnoreCase(MealType.HB.toString())) {
-                        mealsIncluded.setMealType(MealType.HB);
+                if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                    if (childNodeName.equals(Tags.getData(TAG_MEAL_TYPE))) {
+                        if (childNodeContent.equalsIgnoreCase(MealType.AI.toString())) {
+                            mealsIncluded.setMealType(MealType.AI);
+                        } else if (childNodeContent.equalsIgnoreCase(MealType.BB.toString())) {
+                            mealsIncluded.setMealType(MealType.BB);
+                        } else if (childNodeContent.equalsIgnoreCase(MealType.HB.toString())) {
+                            mealsIncluded.setMealType(MealType.HB);
+                        }
                     }
                 }
             }
         }
         return mealsIncluded;
-
-    }// getInformationAboutMeals
+    }
 
     private static FamilyVoucher getInformationAboutFamilyVouchers(Node familyVoucherNode) {
 
-        /* FamilyVoucher object creation */
         FamilyVoucher familyVoucher = new FamilyVoucher();
-
-        /* Processing attributes */
+//Got familyVoucher attributes
         NamedNodeMap attributes = familyVoucherNode.getAttributes();
+//An only attribute and because index is 0
         String idAttribute = attributes.item(0).getTextContent();
+// Got id from attribute
         familyVoucher.setId(Integer.parseInt(idAttribute));
 
-        commonForAllTagsProcessing(familyVoucherNode, familyVoucher);
+        processAllCommonTags(familyVoucherNode, familyVoucher);
 
-        /* Avoiding loop reuse by getting the penultimate node */
-        Node penultimateNode = familyVoucherNode.getLastChild().getPreviousSibling();
-        if (penultimateNode.getNodeName().equalsIgnoreCase(getData(TAG_NUMBER_OF_FAMILY_MEMBERS))) {
-            familyVoucher.setNumOfFamilyMembers((Integer.parseInt(penultimateNode.getTextContent())));
+        Node lastNode = familyVoucherNode.getLastChild().getPreviousSibling();
+        if (lastNode.getNodeName().equalsIgnoreCase(Tags.getData(TAG_NUMBER_OF_FAMILY_MEMBERS))) {
+            familyVoucher.setNumOfFamilyMembers((Integer.parseInt(lastNode.getTextContent())));
         }
         return familyVoucher;
-
-    }// getInformationAboutFamilyVouchers
+    }
 
     private static Document buildDocument(String filePath) {
         File file = new File(filePath);
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document document = null;
         try {
-            document = dbf.newDocumentBuilder().parse(file);
+            document = factory.newDocumentBuilder().parse(file);
         } catch (Exception e) {
-            System.out.println("Document Parsing Error");
-            e.printStackTrace();
-            System.exit(0);
+            LOGGER.error("Document Parsing Error\n" + e.getMessage());
         }
         return document;
-    }// buildDocument
+    }
 
-    private static void commonForAllTagsProcessing(Node voucherNode, Voucher voucher) {
+    private static void processAllCommonTags(Node voucherNode, Voucher voucher) {
 
-        /* Processing familyVoucherNode children */
         NodeList voucherNodeChildren = voucherNode.getChildNodes();
+
         for (int i = 0; i < voucherNodeChildren.getLength(); i++) {
 
-            /* Variables for simplifying understanding */
             Node childNode = voucherNodeChildren.item(i);
             String childNodeContent = childNode.getTextContent();
             String childNodeName = childNode.getNodeName();
 
-            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_TYPE))) {
-                if (childNodeContent.equalsIgnoreCase(Type.BUSINESS.toString())) {
-                    voucher.setType(Type.BUSINESS);
-                    continue;
+            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                if (childNodeName.equals(Tags.getData(TAG_TYPE))) {
+                    if (childNodeContent.equalsIgnoreCase(Type.BUSINESS.toString())) {
+                        voucher.setType(Type.BUSINESS);
+                    } else  if (childNodeContent.equalsIgnoreCase(Type.WEEKEND.toString())) {
+                        voucher.setType(Type.WEEKEND);
+                    }
+                } else if (childNodeName.equals(Tags.getData(TAG_COUNTRY))) {
+                    voucher.setCountry(childNodeContent);
+                } else if (childNodeName.equals(Tags.getData(TAG_TRANSPORT))) {
+                    voucher.setTransport(childNodeContent);
+                } else if (childNodeName.equals(Tags.getData(TAG_NUMBER_OF_DAYS))) {
+                    voucher.setNumberOfDays(Integer.parseInt(childNodeContent));
+                } else if (childNodeName.equals(Tags.getData(TAG_HOTEL_CHARACTERISTICS))) {
+                    voucher.setHotelCharacteristics(getHotelCharacteristics(childNode));
+                } else if (childNodeName.equals(Tags.getData(TAG_COST))) {
+                    voucher.setCost(Integer.parseInt(childNodeContent));
                 }
-                if (childNodeContent.equalsIgnoreCase(Type.WEEKEND.toString())) {
-                    voucher.setType(Type.WEEKEND);
-                    continue;
-                }
-            }
-
-            if (childNodeName.equals(getData(TAG_COUNTRY))) {
-                voucher.setCountry(childNodeContent);
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_TRANSPORT))) {
-                voucher.setTransport(childNodeContent);
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_NUMBER_OF_DAYS))) {
-                voucher.setNumberOfDays(Integer.parseInt(childNodeContent));
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_HOTEL_CHARACTERISTICS))) {
-                voucher.setHotelCharacteristics(getHotelCharacteristics(childNode));
-                continue;
-            }
-
-            if (childNodeName.equals(getData(TAG_COST))) {
-                voucher.setCost(Integer.parseInt(childNodeContent));
             }
         }
-
-    }// commonForAllTagsProcessing
-
-}// XmlDomParser}
+    }
+}
