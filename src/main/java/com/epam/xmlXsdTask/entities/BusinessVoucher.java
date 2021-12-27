@@ -12,10 +12,6 @@ public class BusinessVoucher extends Voucher{
     public BusinessVoucher() {
     }
 
-    public int getNumOfMeetings() {
-        return numOfMeetings;
-    }
-
     public void setNumOfMeetings(int numOfMeetings) {
         this.numOfMeetings = numOfMeetings;
     }

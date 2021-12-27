@@ -18,16 +18,6 @@ public class HotelCharacteristics {
     public HotelCharacteristics() {
     }
 
-    public int getNumOfStars() {
-        return numOfStars;
-    }
-    public MealsIncluded getMealsIncluded() {
-        return mealsIncluded;
-    }
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
     public void setNumOfStars(int numOfStars) {
         this.numOfStars = numOfStars;
     }

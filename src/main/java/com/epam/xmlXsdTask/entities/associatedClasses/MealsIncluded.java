@@ -16,18 +16,6 @@ public class MealsIncluded {
     public MealsIncluded() {
     }
 
-    public MealsIncluded(boolean available, MealType mealType) {
-        this.available = available;
-        this.mealType = mealType;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-    public MealType getMealType() {
-        return mealType;
-    }
-
     public void setAvailable(boolean available) {
         this.available = available;
     }
