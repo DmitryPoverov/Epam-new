@@ -1,7 +1,6 @@
 package com.epam.xmlXsdTask.parsers;
 
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.Tags;
-import com.epam.xmlXsdTask.exceptoin.ParserException;
 import com.epam.xmlXsdTask.entities.BusinessVoucher;
 import com.epam.xmlXsdTask.entities.FamilyVoucher;
 import com.epam.xmlXsdTask.entities.Voucher;
