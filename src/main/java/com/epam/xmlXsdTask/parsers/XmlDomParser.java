@@ -30,8 +30,8 @@ public class XmlDomParser implements Parser {
     @Override
     public List<Voucher> parse(String filePath) {
 
-        Document domObject = buildDocument(filePath);           // Converting XML to DOM Object Model with Error Handling
-        List<Voucher> listOfVouchers = new ArrayList<>();       // list for inputting
+        Document domObject = buildDocument(filePath);
+        List<Voucher> listOfVouchers = new ArrayList<>();
 
         Node rootNode = domObject.getFirstChild();
         NodeList rootChildrenNodes = rootNode.getChildNodes();
