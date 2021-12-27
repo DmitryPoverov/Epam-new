@@ -1,6 +1,7 @@
 package com.epam.xmlXsdTask.validator;
 
-import com.epam.xmlXsdTask.handler.VoucherErrorHandler;
+import com.epam.xmlXsdTask.exceptoin.ParserException;
+import com.epam.xmlXsdTask.handler.VouchersErrorHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
@@ -16,12 +17,8 @@ import java.io.IOException;
 
 public class VouchersValidator {
     private static final Logger LOGGER = LogManager.getLogger(VouchersValidator.class);
-    public static void main(String[] args) {
-        VouchersValidator test = new VouchersValidator();
-        test.isValid("src/main/resources/vouchers.xml", "src/main/resources/vouchersSchema.xsd");
-    }
 
-    public boolean isValid(String xmlPath, String xsdPath) {
+    public boolean isValid(String xmlPath, String xsdPath) throws ParserException {
         String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
         SchemaFactory schemaFactory = SchemaFactory.newInstance(language);
         boolean isValid = true;
@@ -33,8 +30,9 @@ public class VouchersValidator {
             Source source = new StreamSource(xmlPath);
 
             Validator validator = schema.newValidator();
-            VoucherErrorHandler errorHandler = new VoucherErrorHandler();
+            VouchersErrorHandler errorHandler = new VouchersErrorHandler();
             validator.setErrorHandler(errorHandler);
+
             validator.validate(source);
 
             if (errorHandler.isErrorHappened()) {
@@ -43,9 +41,12 @@ public class VouchersValidator {
 
             LOGGER.info(String.format("File %s is valid.", xmlPath));
 
-        } catch (SAXException | IOException e) {
+        } catch (SAXException | IOException | NullPointerException e) {
             LOGGER.info(String.format("File %s is not valid.", xmlPath), e);
+            isValid = false;
+            throw new ParserException(e.toString());
         }
+
         return isValid;
     }
 }

@@ -45,4 +45,24 @@ public class HotelCharacteristics {
                 mealsIncluded + ", \n" +
                 "\t\troomType = " + roomType.toString().toLowerCase() + "]";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HotelCharacteristics that = (HotelCharacteristics) o;
+
+        if (numOfStars != that.numOfStars) return false;
+        if (!mealsIncluded.equals(that.mealsIncluded)) return false;
+        return roomType == that.roomType;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = numOfStars;
+        result = 31 * result + mealsIncluded.hashCode();
+        result = 31 * result + roomType.hashCode();
+        return result;
+    }
 }

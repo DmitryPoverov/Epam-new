@@ -36,4 +36,22 @@ public class MealsIncluded {
                 "\t\t\tavailable = " + available + ", \n" +
                 "\t\t\tmealType = " + mealType + "]";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MealsIncluded that = (MealsIncluded) o;
+
+        if (available != that.available) return false;
+        return mealType == that.mealType;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (available ? 1 : 0);
+        result = 31 * result + mealType.hashCode();
+        return result;
+    }
 }

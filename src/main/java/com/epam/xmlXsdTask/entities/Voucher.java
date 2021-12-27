@@ -82,4 +82,32 @@ public abstract class Voucher {
                     hotelCharacteristics + ", \n" +
                     "\tcost = " + cost;
         }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Voucher voucher = (Voucher) o;
+
+        if (id != voucher.id) return false;
+        if (numberOfDays != voucher.numberOfDays) return false;
+        if (cost != voucher.cost) return false;
+        if (type != voucher.type) return false;
+        if (!country.equals(voucher.country)) return false;
+        if (!transport.equals(voucher.transport)) return false;
+        return hotelCharacteristics.equals(voucher.hotelCharacteristics);
     }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + type.hashCode();
+        result = 31 * result + country.hashCode();
+        result = 31 * result + numberOfDays;
+        result = 31 * result + transport.hashCode();
+        result = 31 * result + hotelCharacteristics.hashCode();
+        result = 31 * result + cost;
+        return result;
+    }
+}

@@ -26,4 +26,22 @@ public class FamilyVoucher extends Voucher {
                 super.toString() + " \n" +
                 "numOfMeetings=" + numOfFamilyMembers + "]";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        FamilyVoucher that = (FamilyVoucher) o;
+
+        return numOfFamilyMembers == that.numOfFamilyMembers;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + numOfFamilyMembers;
+        return result;
+    }
 }

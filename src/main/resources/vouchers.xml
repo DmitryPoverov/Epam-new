@@ -3,7 +3,7 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="test vouchersSchema.xsd">
 
-    <familyVoucher id="11">
+    <familyVoucher id="1">
         <type>Weekend</type>
         <country>Mexico</country>
         <numberOfDays>10</numberOfDays>
@@ -19,7 +19,7 @@
         <numOfFamilyMembers>3</numOfFamilyMembers>
     </familyVoucher>
 
-    <businessVoucher id="22">
+    <businessVoucher id="2">
         <type>Business</type>
         <country>USA</country>
         <numberOfDays>2</numberOfDays>

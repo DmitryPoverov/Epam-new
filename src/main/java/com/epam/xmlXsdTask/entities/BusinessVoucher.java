@@ -26,4 +26,22 @@ public class BusinessVoucher extends Voucher{
                 super.toString() + " \n" +
                 "numOfMeetings=" + numOfMeetings + "]";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        BusinessVoucher that = (BusinessVoucher) o;
+
+        return numOfMeetings == that.numOfMeetings;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + numOfMeetings;
+        return result;
+    }
 }
