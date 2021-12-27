@@ -1,7 +1,6 @@
 package com.epam.xmlXsdTask.parsers;
 
 import com.epam.xmlXsdTask.entities.Voucher;
-import com.epam.xmlXsdTask.handler.SaxParserHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;

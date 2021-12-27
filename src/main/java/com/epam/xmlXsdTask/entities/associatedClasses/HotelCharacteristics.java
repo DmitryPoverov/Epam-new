@@ -2,11 +2,9 @@ package com.epam.xmlXsdTask.entities.associatedClasses;
 
 import com.epam.xmlXsdTask.entities.associatedClasses.enums.RoomType;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
+@XmlRootElement(name = "HotelCharacteristics", namespace = "test")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HotelCharacteristics", propOrder = {"numOfStars", "mealsIncluded", "roomType"})
 public class HotelCharacteristics {
