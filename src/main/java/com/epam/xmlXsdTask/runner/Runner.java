@@ -40,7 +40,7 @@ public class Runner {
         }
 
         System.out.println("\n3) Xml JAXB Parser:");
-        XmlJaxbParser xmlJaxbParser = new XmlJaxbParser();
+        Parser xmlJaxbParser = new XmlJaxbParser();
         List<Voucher> lisTouristVouchers = null;
         try {
             lisTouristVouchers = xmlJaxbParser.parse(FILE_PATH);
