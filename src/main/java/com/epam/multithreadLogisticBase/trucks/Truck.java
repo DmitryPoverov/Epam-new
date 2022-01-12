@@ -38,16 +38,16 @@ public class Truck implements Runnable {
     public void run() {
         try {
             base.getLock().lock();
-            base.getSemaphore().acquire();
-            System.out.println(base.getSemaphore().availablePermits());
-            System.out.printf("%s is START servicing in %s\n", this, Thread.currentThread().getName());
+            base.getTerminals().acquire();
+            System.out.println(base.getTerminals().availablePermits());
+            System.out.printf("%s STARTS servicing in terminal\n", this);
             TimeUnit.SECONDS.sleep(1);
-            System.out.printf("%s FINISHED %s\n", this, Thread.currentThread().getName());
+            System.out.printf("%s FINISHED servicing in terminal\n", this);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(base.getSemaphore().availablePermits());
-            base.getSemaphore().release();
+            System.out.println(base.getTerminals().availablePermits());
+            base.getTerminals().release();
             base.getLock().unlock();
         }
     }

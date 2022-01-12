@@ -7,16 +7,16 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Base {
 
     private static Base instance;
-    private final Semaphore semaphore;
+    private final Semaphore terminals;
     private final Lock lock = new ReentrantLock();
 
     public Base(Semaphore semaphore) {
-        this.semaphore = semaphore;
+        this.terminals = semaphore;
     }
 
-    public static Base getInstance(Semaphore semaphore) {
+    public static Base getInstance(Semaphore terminals) {
         if (instance == null) {
-            instance = new Base(semaphore);
+            instance = new Base(terminals);
         }
         return instance;
     }
@@ -25,7 +25,7 @@ public class Base {
         return lock;
     }
 
-    public Semaphore getSemaphore() {
-        return semaphore;
+    public Semaphore getTerminals() {
+        return terminals;
     }
 }
