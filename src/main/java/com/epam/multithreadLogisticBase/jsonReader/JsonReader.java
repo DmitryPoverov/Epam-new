@@ -7,9 +7,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// Util class
 public class JsonReader {
 
     private JsonReader() {
@@ -30,14 +32,12 @@ public class JsonReader {
 
     public static List<Truck> getShips(String path) {
         ObjectMapper mapper = new ObjectMapper();
-        List<Truck> shipList;
         Truck[] trucks = new Truck[0];
         try {
             trucks = mapper.readValue(readJson(path), Truck[].class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        shipList = Arrays.asList(trucks);
-        return shipList;
+        return new ArrayList<Truck>(Arrays.asList(trucks));
     }
 }
