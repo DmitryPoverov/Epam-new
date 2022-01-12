@@ -1,0 +1,10 @@
+[
+  {
+    "id" : 101,
+    "loaded" : true
+  },
+  {
+    "id" : 202,
+    "loaded" : false
+  }
+]

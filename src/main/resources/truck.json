@@ -1,0 +1,26 @@
+[
+    {
+      "id" : 1,
+      "loaded" : true
+    },
+    {
+      "id" : 2,
+      "loaded" : true
+    },
+    {
+      "id" : 3,
+      "loaded" : true
+    },
+    {
+      "id" : 4,
+      "loaded" : true
+    },
+    {
+      "id" : 5,
+      "loaded" : false
+    },
+    {
+      "id" : 6,
+      "loaded" : true
+    }
+]
