@@ -17,13 +17,6 @@ public class Truck implements Runnable {
         this.loaded = loaded;
     }
 
-    public int getId() {
-        return id;
-    }
-    public boolean isLoaded() {
-        return loaded;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -39,14 +32,13 @@ public class Truck implements Runnable {
         try {
             base.getLock().lock();
             base.getTerminals().acquire();
-            System.out.println(base.getTerminals().availablePermits());
-            System.out.printf("%s STARTS servicing in terminal\n", this);
+            System.out.printf("Track with ID:%s STARTS servicing in terminal. State:%s\n", id, loaded);
             TimeUnit.SECONDS.sleep(1);
-            System.out.printf("%s FINISHED servicing in terminal\n", this);
+            setLoaded(false);
+            System.out.printf("Track with ID:%s FINISHED servicing in terminal. State:%s\n", id, loaded);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(base.getTerminals().availablePermits());
             base.getTerminals().release();
             base.getLock().unlock();
         }
