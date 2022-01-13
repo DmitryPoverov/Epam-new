@@ -30,7 +30,7 @@ public class JsonReader {
         return builder.toString();
     }
 
-    public static List<Truck> getShips(String path) {
+    public static List<Truck> getTrucks(String path) {
         ObjectMapper mapper = new ObjectMapper();
         Truck[] trucks = new Truck[0];
         try {

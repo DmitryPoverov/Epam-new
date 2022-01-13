@@ -12,6 +12,7 @@ public class Truck implements Runnable {
 
     public Truck() {
     }
+
     public Truck(int id, boolean loaded) {
         this.id = id;
         this.loaded = loaded;
@@ -20,27 +21,30 @@ public class Truck implements Runnable {
     public void setId(int id) {
         this.id = id;
     }
+
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
     }
+
     public void setBase(Base base) {
         this.base = base;
     }
 
     @Override
     public void run() {
+        base.getLock().lock();
         try {
-            base.getLock().lock();
             base.getTerminals().acquire();
-            System.out.printf("Track with ID:%s STARTS servicing in terminal. State:%s\n", id, loaded);
-            TimeUnit.SECONDS.sleep(1);
+            base.getLock().unlock();
+            System.out.printf("Truck:[%s] STARTS servicing in terminal. Truck is loaded:%s.\n", id, (loaded? "YES" : "NO"));
+            TimeUnit.MILLISECONDS.sleep(500);
             setLoaded(false);
-            System.out.printf("Track with ID:%s FINISHED servicing in terminal. State:%s\n", id, loaded);
+            System.out.printf("Truck: %s was serviced in terminal. Truck is loaded:%s.\n", id, (loaded? "YES" : "NO"));
+            base.getTerminals().release();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            base.getTerminals().release();
-            base.getLock().unlock();
+
         }
     }
 
