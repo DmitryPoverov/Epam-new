@@ -37,10 +37,10 @@ public class Truck implements Runnable {
             try {
                 base.getTerminals().acquire();
                 base.getLock().unlock();
-                System.out.printf("Truck:[%s] is STARTING service in terminal. Truck is loaded:%s. [%s]\n", id, (loaded ? "YES" : "NO"), Thread.currentThread().getName());
+                System.out.printf("Truck:[%s] is STARTING service in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
                 TimeUnit.SECONDS.sleep(1);
                 setLoaded(false);
-                System.out.printf("Truck: %s was serviced in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
+                System.out.printf("Truck: %s was serviced in terminal. Truck is unloaded:%s.\n", id, (loaded ? "NO" : "YES"));
                 base.getTerminals().release();
             } catch (InterruptedException e) {
                 e.printStackTrace();
