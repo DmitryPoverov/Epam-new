@@ -28,7 +28,6 @@ public class TruckRunner {
                 .peek(truck -> truck.setBase(base))
                 .map(threadPool::submit)
                 .collect(Collectors.toList());
-
         threadPool.shutdown();
     }
 }

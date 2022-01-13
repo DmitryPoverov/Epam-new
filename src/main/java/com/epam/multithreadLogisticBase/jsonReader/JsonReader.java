@@ -10,9 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 // Util class
 public class JsonReader {
+    private static final Logger LOGGER = LogManager.getLogger(JsonReader.class);
 
     private JsonReader() {
     }
@@ -36,8 +39,9 @@ public class JsonReader {
         try {
             trucks = mapper.readValue(readJson(path), Truck[].class);
         } catch (JsonProcessingException e) {
+            LOGGER.error("Parsing error" + path);
             e.printStackTrace();
         }
-        return new ArrayList<Truck>(Arrays.asList(trucks));
+        return new ArrayList<>(Arrays.asList(trucks));
     }
 }

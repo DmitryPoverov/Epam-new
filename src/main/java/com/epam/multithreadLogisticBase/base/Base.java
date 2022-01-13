@@ -1,13 +1,17 @@
 package com.epam.multithreadLogisticBase.base;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Base {
 
-    private static Base instance;
+    private static final Logger LOGGER = LogManager.getLogger(Base.class);
     private static final Lock STATIC_LOCK = new ReentrantLock();
+    private static Base instance;
     private final Semaphore terminals;
     private final Lock lock = new ReentrantLock();
 
@@ -21,6 +25,7 @@ public class Base {
             instance = new Base(terminals);
             STATIC_LOCK.unlock();
         }
+        LOGGER.info("Instance of Base was returned");
         return instance;
     }
 
