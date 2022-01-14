@@ -40,3 +40,6 @@
 [ERROR] 2022-01-14 11:32:01.108 [main] JsonReader - Parsing error. File CONTENT is wrong. File: src/test/resources/wrongTruckTest.json
 [ERROR] 2022-01-14 11:32:46.273 [main] JsonReader - Parsing error. File PATH is wrong. File: src/main/res/tru.json
 [ERROR] 2022-01-14 11:32:46.282 [main] JsonReader - Parsing error. File CONTENT is wrong. File: src/test/resources/wrongTruckTest.json
+[INFO ] 2022-01-14 11:47:26.044 [main] Base - Instance of Base was returned
+[ERROR] 2022-01-14 11:52:30.793 [main] JsonReader - Parsing error. File PATH is wrong. File: src/main/res/tru.json
+[ERROR] 2022-01-14 11:52:30.805 [main] JsonReader - Parsing error. File CONTENT is wrong. File: src/test/resources/wrongTruckTest.json

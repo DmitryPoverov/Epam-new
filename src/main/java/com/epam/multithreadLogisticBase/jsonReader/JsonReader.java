@@ -15,14 +15,14 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// Util class
+// I don't know: Is it normal to make this class of util class with private constructor and static methods
 public class JsonReader {
     private static final Logger LOGGER = LogManager.getLogger(JsonReader.class);
 
-    private JsonReader() {
+    public JsonReader() {
     }
 
-    private static String readJson (String path) throws IOException {
+    private String readJson (String path) throws IOException {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader bR = new BufferedReader (new FileReader(path))) {
             int ch;
@@ -33,7 +33,8 @@ public class JsonReader {
         return builder.toString();
     }
 
-    public static List<Truck> getTrucks(String path) throws JsonContentException, JsonPathException {
+// Version with throwing of exceptions
+    public List<Truck> getTrucks(String path) throws JsonContentException, JsonPathException {
         ObjectMapper mapper = new ObjectMapper();
         Truck[] trucks;
         try {
@@ -44,6 +45,18 @@ public class JsonReader {
         } catch (IOException e) {
             LOGGER.error("Parsing error. File PATH is wrong. File: " + path);
             throw new JsonPathException("Path is wrong");
+        }
+        return new ArrayList<>(Arrays.asList(trucks));
+    }
+
+// Version with throwing of exceptions
+    public List<Truck> getTruckList(String path) {
+        ObjectMapper mapper = new ObjectMapper();
+        Truck[] trucks = new Truck[0];
+        try {
+            trucks = mapper.readValue(readJson(path), Truck[].class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return new ArrayList<>(Arrays.asList(trucks));
     }

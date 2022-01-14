@@ -19,11 +19,25 @@ public class JsonReaderTest {
     @Test
     public void testShouldParseFileWhenFileIsCorrect() throws JsonContentException, JsonPathException {
         //given
+        JsonReader reader = new JsonReader();
         Truck truck1 = new Truck(101, true);
         Truck truck2 = new Truck(202, false);
         List<Truck> expected = Arrays.asList(truck1, truck2);
         //when
-        List<Truck> actual = JsonReader.getTrucks(VALID_PATH);
+        List<Truck> actual = reader.getTrucks(VALID_PATH);
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testShouldParseWithSecondVersionMethodFileWhenFileIsCorrect() {
+        //given
+        JsonReader reader = new JsonReader();
+        Truck truck1 = new Truck(101, true);
+        Truck truck2 = new Truck(202, false);
+        List<Truck> expected = Arrays.asList(truck1, truck2);
+        //when
+        List<Truck> actual = reader.getTruckList(VALID_PATH);
         //then
         Assert.assertEquals(expected, actual);
     }
@@ -31,16 +45,18 @@ public class JsonReaderTest {
     @Test(expected = JsonContentException.class)
     public void testShouldNotParseFileWhenFileIsNotCorrect() throws JsonPathException, JsonContentException {
         //given
+        JsonReader reader = new JsonReader();
         //when
-        JsonReader.getTrucks(INVALID_FILE);
+        reader.getTrucks(INVALID_FILE);
         //then
     }
 
     @Test(expected = JsonPathException.class)
     public void testShouldNotParseFileWhenPathIsNotCorrect() throws JsonPathException, JsonContentException {
         //given
+        JsonReader reader = new JsonReader();
         //when
-        JsonReader.getTrucks(JSON_FILE_WRONG_PATH);
+        reader.getTrucks(JSON_FILE_WRONG_PATH);
         //then
     }
 }

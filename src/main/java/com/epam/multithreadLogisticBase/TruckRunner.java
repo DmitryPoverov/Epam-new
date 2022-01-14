@@ -24,7 +24,16 @@ public class TruckRunner {
 
         ExecutorService threadPool = Executors.newCachedThreadPool();
 
-        try {
+        JsonReader reader = new JsonReader();
+        List<Truck> trucks =  reader.getTruckList(JSON_FILE_PATH);
+        trucks.stream()
+                .peek(truck -> truck.setBase(base))
+                .map(threadPool::submit)
+                .collect(Collectors.toList());
+        threadPool.shutdown();
+
+/* I don't know: it's normal to throw in parser exceptions and then catch its in the main()?
+       try {
             List<Truck> trucks =  JsonReader.getTrucks(JSON_FILE_PATH);
             trucks.stream()
                     .peek(truck -> truck.setBase(base))
@@ -33,7 +42,7 @@ public class TruckRunner {
             threadPool.shutdown();
         } catch (JsonContentException | JsonPathException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
 
