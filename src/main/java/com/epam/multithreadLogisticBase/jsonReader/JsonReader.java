@@ -1,5 +1,7 @@
 package com.epam.multithreadLogisticBase.jsonReader;
 
+import com.epam.multithreadLogisticBase.jsonReader.exception.JsonContentException;
+import com.epam.multithreadLogisticBase.jsonReader.exception.JsonPathException;
 import com.epam.multithreadLogisticBase.trucks.Truck;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,27 +22,28 @@ public class JsonReader {
     private JsonReader() {
     }
 
-    private static String readJson (String path) {
+    private static String readJson (String path) throws IOException {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader bR = new BufferedReader (new FileReader(path))) {
             int ch;
             while ((ch = bR.read()) != -1) {
                 builder.append((char)ch);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return builder.toString();
     }
 
-    public static List<Truck> getTrucks(String path) {
+    public static List<Truck> getTrucks(String path) throws JsonContentException, JsonPathException {
         ObjectMapper mapper = new ObjectMapper();
-        Truck[] trucks = new Truck[0];
+        Truck[] trucks;
         try {
             trucks = mapper.readValue(readJson(path), Truck[].class);
         } catch (JsonProcessingException e) {
-            LOGGER.error("Parsing error" + path);
-            e.printStackTrace();
+            LOGGER.error("Parsing error. File CONTENT is wrong. File: " + path);
+            throw new JsonContentException("Content is wrong");
+        } catch (IOException e) {
+            LOGGER.error("Parsing error. File PATH is wrong. File: " + path);
+            throw new JsonPathException("Path is wrong");
         }
         return new ArrayList<>(Arrays.asList(trucks));
     }

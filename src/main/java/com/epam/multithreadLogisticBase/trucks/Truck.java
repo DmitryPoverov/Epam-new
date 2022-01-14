@@ -48,9 +48,25 @@ public class Truck implements Runnable {
         } else {
             System.out.printf("Truck: %s is empty.\n", id);
             base.getLock().unlock();
-
         }
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Truck truck = (Truck) o;
+
+        if (id != truck.id) return false;
+        return loaded == truck.loaded;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (loaded ? 1 : 0);
+        return result;
     }
 
     @Override

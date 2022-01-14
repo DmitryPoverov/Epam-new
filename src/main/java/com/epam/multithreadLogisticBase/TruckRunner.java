@@ -2,6 +2,8 @@ package com.epam.multithreadLogisticBase;
 
 import com.epam.multithreadLogisticBase.base.Base;
 import com.epam.multithreadLogisticBase.jsonReader.JsonReader;
+import com.epam.multithreadLogisticBase.jsonReader.exception.JsonContentException;
+import com.epam.multithreadLogisticBase.jsonReader.exception.JsonPathException;
 import com.epam.multithreadLogisticBase.trucks.Truck;
 
 import java.util.List;
@@ -22,13 +24,16 @@ public class TruckRunner {
 
         ExecutorService threadPool = Executors.newCachedThreadPool();
 
-        List<Truck> trucks = JsonReader.getTrucks(JSON_FILE_PATH);
-
-        trucks.stream()
-                .peek(truck -> truck.setBase(base))
-                .map(threadPool::submit)
-                .collect(Collectors.toList());
-        threadPool.shutdown();
+        try {
+            List<Truck> trucks =  JsonReader.getTrucks(JSON_FILE_PATH);
+            trucks.stream()
+                    .peek(truck -> truck.setBase(base))
+                    .map(threadPool::submit)
+                    .collect(Collectors.toList());
+            threadPool.shutdown();
+        } catch (JsonContentException | JsonPathException e) {
+            e.printStackTrace();
+        }
     }
 }
 
