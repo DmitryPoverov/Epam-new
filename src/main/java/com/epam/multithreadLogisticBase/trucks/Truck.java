@@ -30,6 +30,26 @@ public class Truck implements Runnable {
         this.base = base;
     }
 
+/*    @Override
+    public void run() {
+        base.getLock().lock();
+        if (loaded) {
+            try {
+                base.getTerminals().acquire();
+                base.getLock().unlock();
+                System.out.printf("Truck:[%s] is STARTING service in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
+                TimeUnit.SECONDS.sleep(1);
+                setLoaded(false);
+                System.out.printf("Truck: %s was serviced in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
+                base.getTerminals().release();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.printf("Truck: %s is empty.\n", id);
+            base.getLock().unlock();
+        }*/
+
     @Override
     public void run() {
         base.getLock().lock();
@@ -40,7 +60,7 @@ public class Truck implements Runnable {
                 System.out.printf("Truck:[%s] is STARTING service in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
                 TimeUnit.SECONDS.sleep(1);
                 setLoaded(false);
-                System.out.printf("Truck: %s was serviced in terminal. Truck is unloaded:%s.\n", id, (loaded ? "NO" : "YES"));
+                System.out.printf("Truck: %s was serviced in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
                 base.getTerminals().release();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -52,11 +72,11 @@ public class Truck implements Runnable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Truck truck = (Truck) o;
+        Truck truck = (Truck) object;
 
         if (id != truck.id) return false;
         return loaded == truck.loaded;
