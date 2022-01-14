@@ -24,8 +24,7 @@ public class TruckRunner {
 
         ExecutorService threadPool = Executors.newCachedThreadPool();
 
-        JsonReader reader = new JsonReader();
-        List<Truck> trucks =  reader.getTruckList(JSON_FILE_PATH);
+        List<Truck> trucks =  JsonReader.getTruckList(JSON_FILE_PATH);
         trucks.stream()
                 .peek(truck -> truck.setBase(base))
                 .map(threadPool::submit)

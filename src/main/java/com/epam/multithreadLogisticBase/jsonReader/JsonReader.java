@@ -15,14 +15,14 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// I don't know: Is it normal to make this class of util class with private constructor and static methods
+// I don't know: to make this class as util class with private constructor and static methods or with non-static methods
 public class JsonReader {
     private static final Logger LOGGER = LogManager.getLogger(JsonReader.class);
 
-    public JsonReader() {
+    private JsonReader() {
     }
 
-    private String readJson (String path) throws IOException {
+    private static String readJson (String path) throws IOException {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader bR = new BufferedReader (new FileReader(path))) {
             int ch;
@@ -34,7 +34,7 @@ public class JsonReader {
     }
 
 // Version with throwing of exceptions
-    public List<Truck> getTrucks(String path) throws JsonContentException, JsonPathException {
+    public static List<Truck> getTrucks(String path) throws JsonContentException, JsonPathException {
         ObjectMapper mapper = new ObjectMapper();
         Truck[] trucks;
         try {
@@ -49,8 +49,8 @@ public class JsonReader {
         return new ArrayList<>(Arrays.asList(trucks));
     }
 
-// Version with throwing of exceptions
-    public List<Truck> getTruckList(String path) {
+// Version without throwing of exceptions
+    public static List<Truck> getTruckList(String path) {
         ObjectMapper mapper = new ObjectMapper();
         Truck[] trucks = new Truck[0];
         try {
