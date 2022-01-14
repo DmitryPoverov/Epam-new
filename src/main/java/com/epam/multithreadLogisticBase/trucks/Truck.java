@@ -30,26 +30,6 @@ public class Truck implements Runnable {
         this.base = base;
     }
 
-/*    @Override
-    public void run() {
-        base.getLock().lock();
-        if (loaded) {
-            try {
-                base.getTerminals().acquire();
-                base.getLock().unlock();
-                System.out.printf("Truck:[%s] is STARTING service in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
-                TimeUnit.SECONDS.sleep(1);
-                setLoaded(false);
-                System.out.printf("Truck: %s was serviced in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
-                base.getTerminals().release();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.printf("Truck: %s is empty.\n", id);
-            base.getLock().unlock();
-        }*/
-
     @Override
     public void run() {
         base.getLock().lock();
