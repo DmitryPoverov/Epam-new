@@ -41,17 +41,10 @@ public class Base {
             lock.lock();
             terminals.acquire();
             lock.unlock();
-            if (truck.isLoaded()) {
-                System.out.printf("Truck: + %s loaded:%s. Truck is UNLOADING...\n", truck.getId(), (truck.isLoaded() ? "YES" : "NO"));
-                TimeUnit.SECONDS.sleep(1);
-                truck.setLoaded(false);
-                System.out.printf("End  : + %s unloaded:%s.\n", truck.getId(), (truck.isLoaded() ? "NO" : "YES"));
-            } else {
-                System.out.printf("Truck: - %s empty:%s. Truck is LOADING...\n", truck.getId(), (truck.isLoaded() ? "NO" : "YES"));
-                TimeUnit.SECONDS.sleep(1);
-                truck.setLoaded(true);
-                System.out.printf("End  : - %s loaded:%s.\n", truck.getId(), (truck.isLoaded() ? "YES" : "NO"));
-            }
+            System.out.printf("Truck: %d is %s\n", truck.getId(), (truck.isLoaded() ? "+ loaded." : "- empty."));
+            TimeUnit.SECONDS.sleep(1);
+            truck.setLoaded(!truck.isLoaded());
+            System.out.printf("Truck: %d is %s\n", truck.getId(), (truck.isLoaded() ? "+ loaded." : "- unloaded."));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

@@ -20,7 +20,7 @@ public class TruckRunner {
         for (Truck truck : trucks) {
             threadPool.submit(truck);
             try {
-                TimeUnit.MILLISECONDS.sleep(3);
+                TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
