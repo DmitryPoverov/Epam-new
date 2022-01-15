@@ -9,7 +9,7 @@
     },
     {
       "id" : 3,
-      "loaded" : true
+      "loaded" : false
     },
     {
       "id" : 4,
@@ -21,26 +21,6 @@
     },
     {
       "id" : 6,
-      "loaded" : true
-    },
-    {
-      "id" : 7,
-      "loaded" : true
-    },
-    {
-      "id" : 8,
-      "loaded" : true
-    },
-    {
-      "id" : 9,
-      "loaded" : true
-    },
-    {
-      "id" : 10,
-      "loaded" : false
-    },
-    {
-      "id" : 11,
       "loaded" : true
     }
 ]

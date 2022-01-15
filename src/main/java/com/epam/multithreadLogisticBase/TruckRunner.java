@@ -6,7 +6,6 @@ import com.epam.multithreadLogisticBase.trucks.Truck;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 public class TruckRunner {
 
@@ -14,7 +13,7 @@ public class TruckRunner {
 
     public static void main(String[] args) {
 
-        ExecutorService threadPool = Executors.newCachedThreadPool();
+        ExecutorService threadPool = Executors.newFixedThreadPool(6);
 
         List<Truck> trucks =  JsonReader.getTruckList(JSON_FILE_PATH);
         for (Truck truck : trucks) {

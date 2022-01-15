@@ -1,9 +1,11 @@
 package com.epam.multithreadLogisticBase.base;
 
+import com.epam.multithreadLogisticBase.trucks.Truck;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -34,11 +36,26 @@ public class Base {
         return temporalInstance;
     }
 
-    public Lock getLock() {
-        return lock;
-    }
-
-    public Semaphore getTerminals() {
-        return terminals;
+    public void unloadTruck(Truck truck) {
+        try {
+            lock.lock();
+            terminals.acquire();
+            lock.unlock();
+            if (truck.isLoaded()) {
+                System.out.printf("Truck: + %s loaded:%s. Truck is UNLOADING...\n", truck.getId(), (truck.isLoaded() ? "YES" : "NO"));
+                TimeUnit.SECONDS.sleep(1);
+                truck.setLoaded(false);
+                System.out.printf("Truck: + %s unloaded:%s.\n", truck.getId(), (truck.isLoaded() ? "NO" : "YES"));
+            } else {
+                System.out.printf("Truck: - %s empty:%s. Truck is LOADING...\n", truck.getId(), (truck.isLoaded() ? "NO" : "YES"));
+                TimeUnit.SECONDS.sleep(1);
+                truck.setLoaded(true);
+                System.out.printf("Truck: - %s loaded:%s.\n", truck.getId(), (truck.isLoaded() ? "YES" : "NO"));
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            terminals.release();
+        }
     }
 }

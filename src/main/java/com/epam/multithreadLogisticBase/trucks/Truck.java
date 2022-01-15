@@ -2,8 +2,6 @@ package com.epam.multithreadLogisticBase.trucks;
 
 import com.epam.multithreadLogisticBase.base.Base;
 
-import java.util.concurrent.TimeUnit;
-
 public class Truck implements Runnable {
 
     private int id;
@@ -20,32 +18,21 @@ public class Truck implements Runnable {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
     }
 
+    public int getId() {
+        return id;
+    }
+    public boolean isLoaded() {
+        return loaded;
+    }
 
     @Override
     public void run() {
         Base base = Base.getInstance();
-        base.getLock().lock();
-        if (loaded) {
-            try {
-                base.getTerminals().acquire();
-                base.getLock().unlock();
-                System.out.printf("Truck:[%s] is STARTING service in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
-                TimeUnit.SECONDS.sleep(1);
-                setLoaded(false);
-                System.out.printf("Truck: %s was serviced in terminal. Truck is loaded:%s.\n", id, (loaded ? "YES" : "NO"));
-                base.getTerminals().release();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.printf("Truck: %s is empty.\n", id);
-            base.getLock().unlock();
-        }
+        base.unloadTruck(this);
     }
 
     @Override
