@@ -6,6 +6,7 @@ import com.epam.multithreadLogisticBase.trucks.Truck;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class TruckRunner {
 
@@ -18,6 +19,11 @@ public class TruckRunner {
         List<Truck> trucks =  JsonReader.getTruckList(JSON_FILE_PATH);
         for (Truck truck : trucks) {
             threadPool.submit(truck);
+            try {
+                TimeUnit.MILLISECONDS.sleep(4);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         threadPool.shutdown();
 
