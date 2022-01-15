@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Truck implements Runnable {
 
-    private Base base;
     private int id;
     private boolean loaded;
 
@@ -26,12 +25,10 @@ public class Truck implements Runnable {
         this.loaded = loaded;
     }
 
-    public void setBase(Base base) {
-        this.base = base;
-    }
 
     @Override
     public void run() {
+        Base base = Base.getInstance();
         base.getLock().lock();
         if (loaded) {
             try {

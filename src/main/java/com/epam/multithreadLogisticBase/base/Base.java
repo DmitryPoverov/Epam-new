@@ -10,23 +10,28 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Base {
 
     private static final Logger LOGGER = LogManager.getLogger(Base.class);
+    private static final int QUANTITY_OF_TERMINALS_ON_THE_BASE = 2;
     private static final Lock STATIC_LOCK = new ReentrantLock();
     private static Base instance;
-    private final Semaphore terminals;
+
+    private final Semaphore terminals = new Semaphore(QUANTITY_OF_TERMINALS_ON_THE_BASE);
     private final Lock lock = new ReentrantLock();
 
-    public Base(Semaphore semaphore) {
-        this.terminals = semaphore;
+    private Base() {
     }
 
-    public static Base getInstance(Semaphore terminals) {
-        if (instance == null) {
+    public static Base getInstance() {
+        Base temporalInstance = instance;
+        if (temporalInstance == null) {
             STATIC_LOCK.lock();
-            instance = new Base(terminals);
+            temporalInstance = instance;
+            if (temporalInstance == null) {
+                instance = temporalInstance = new Base();
+            }
             STATIC_LOCK.unlock();
         }
-        LOGGER.info("Instance of Base was returned");
-        return instance;
+        LOGGER.info("Instance of the Base was returned");
+        return temporalInstance;
     }
 
     public Lock getLock() {
