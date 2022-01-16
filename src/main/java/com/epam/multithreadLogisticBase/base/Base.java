@@ -41,7 +41,7 @@ public class Base {
             System.out.printf("Truck: %d is %s\n", truck.getId(), (truck.isLoaded() ? "+ loaded." : "- empty."));
             TimeUnit.SECONDS.sleep(1);
             truck.setLoaded(!truck.isLoaded());
-            System.out.printf("Truck: %d is %s\n", truck.getId(), (truck.isLoaded() ? "+ loaded." : "- unloaded."));
+            System.out.printf("_Truck: %d is %s\n", truck.getId(), (truck.isLoaded() ? "+ loaded." : "- unloaded."));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

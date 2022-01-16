@@ -43,7 +43,7 @@ public class JsonReader {
             LOGGER.error("Parsing error. File CONTENT is wrong. File: " + path);
             throw new JsonContentException("Content is wrong");
         } catch (IOException e) {
-            LOGGER.error("Parsing error. File PATH is wrong. File: " + path);
+            LOGGER.error("Parsing error. File PATH is wrong. Path: " + path);
             throw new JsonPathException("Path is wrong");
         }
         return new ArrayList<>(Arrays.asList(trucks));
