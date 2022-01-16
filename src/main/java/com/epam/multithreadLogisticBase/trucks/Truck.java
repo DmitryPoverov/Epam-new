@@ -32,7 +32,7 @@ public class Truck implements Runnable {
     @Override
     public void run() {
         Base base = Base.getInstance();
-        base.unloadTruck(this);
+        base.loadUnloadTruck(this);
     }
 
     @Override

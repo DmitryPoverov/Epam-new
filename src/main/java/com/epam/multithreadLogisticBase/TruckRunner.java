@@ -17,10 +17,11 @@ public class TruckRunner {
         ExecutorService threadPool = Executors.newFixedThreadPool(6);
 
         List<Truck> trucks =  JsonReader.getTruckList(JSON_FILE_PATH);
+
         for (Truck truck : trucks) {
             threadPool.submit(truck);
             try {
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(4);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

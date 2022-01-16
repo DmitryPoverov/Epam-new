@@ -17,7 +17,6 @@ public class Base {
     private static Base instance;
 
     private final Semaphore terminals = new Semaphore(QUANTITY_OF_TERMINALS_ON_THE_BASE);
-    private final Lock lock = new ReentrantLock();
 
     private Base() {
     }
@@ -36,11 +35,9 @@ public class Base {
         return temporalInstance;
     }
 
-    public void unloadTruck(Truck truck) {
+    public void loadUnloadTruck(Truck truck) {
         try {
-            lock.lock();
             terminals.acquire();
-            lock.unlock();
             System.out.printf("Truck: %d is %s\n", truck.getId(), (truck.isLoaded() ? "+ loaded." : "- empty."));
             TimeUnit.SECONDS.sleep(1);
             truck.setLoaded(!truck.isLoaded());
