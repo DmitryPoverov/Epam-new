@@ -38,6 +38,7 @@ public class Base {
     public void loadUnloadTruck(Truck truck) {
         try {
             terminals.acquire();
+            STATIC_LOCK.lock();
             System.out.printf("Truck: %d is %s\n", truck.getId(), (truck.isLoaded() ? "+ loaded." : "- empty."));
             TimeUnit.SECONDS.sleep(1);
             truck.setLoaded(!truck.isLoaded());
@@ -46,6 +47,7 @@ public class Base {
             e.printStackTrace();
         } finally {
             terminals.release();
+            STATIC_LOCK.unlock();
         }
     }
 }
