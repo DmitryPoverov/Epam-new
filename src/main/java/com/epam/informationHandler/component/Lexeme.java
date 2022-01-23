@@ -1,6 +1,13 @@
 package com.epam.informationHandler.component;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
+
 public class Lexeme implements Component {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private String value;
     private LexemeType lexemeType;
@@ -40,5 +47,11 @@ public class Lexeme implements Component {
                 "value='" + value + '\'' +
                 ", lexemeType=" + lexemeType +
                 '}';
+    }
+
+    @Override
+    public List<Component> getChildren() {
+        LOGGER.info("Unsupported operation in " + this.getClass().getSimpleName());
+        throw new UnsupportedOperationException("Unsupported operation in " + this.getClass().getSimpleName());
     }
 }
