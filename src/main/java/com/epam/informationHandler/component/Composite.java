@@ -5,37 +5,37 @@ import java.util.List;
 
 public class Composite implements Component {
 
-    private List<Component> children = new ArrayList<>();
+    private List<Component> components = new ArrayList<>();
 
     public Composite() {
     }
     public Composite(List<Component> children) {
-        this.children.addAll(children);
+        this.components.addAll(children);
     }
 
-    public List<Component> getChildren() {
-        return new ArrayList<>(children);
+    public List<Component> getComponents() {
+        return new ArrayList<>(components);
     }
-    public int getChildrenQuantity() {
-        return children.size();
+    public int getNumberOfChildren() {
+        return components.size();
     }
 
-    public void add(Component child) {
-        children.add(child);
+    public void add(Component component) {
+        components.add(component);
     }
 
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Composite composite = (Composite) o;
-        return children.equals(composite.children);
+        return components.equals(composite.components);
     }
     public int hashCode() {
-        return children.hashCode();
+        return components.hashCode();
     }
     public String toString() {
         return "Composite{" +
-                "children=" + children +
+                "components=" + components +
                 '}';
     }
 }

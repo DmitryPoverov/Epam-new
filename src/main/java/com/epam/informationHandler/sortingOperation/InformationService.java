@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 
 public class InformationService {
 
-    public List<Component> sortParagraphBySentencesQuantity(Composite text) {
-        return text.getChildren()
-                .stream()
-                .sorted(Comparator.comparing(paragraph -> paragraph.getChildren().stream().count()))
-                .collect(Collectors.toList());
-    }
-
-    public List<Component> sortWordsByLongInSentence(Composite text) {
-        return text.getChildren()
-                .stream()
-                .sorted(Comparator.comparing(sentence -> sentence.getChildren().stream().count()))
-                .collect(Collectors.toList());
-    }
+//    public List<Component> sortParagraphBySentencesQuantity(Composite text) {
+//        return text.getComponents()
+//                .stream()
+//                .sorted(Comparator.comparing(paragraph -> paragraph.getChildren().stream().count()))
+//                .collect(Collectors.toList());
+//    }
+//
+//    public List<Component> sortWordsByLongInSentence(Composite text) {
+//        return text.getComponents()
+//                .stream()
+//                .sorted(Comparator.comparing(sentence -> sentence.getChildren().stream().count()))
+//                .collect(Collectors.toList());
+//    }
 }

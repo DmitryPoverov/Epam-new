@@ -1,26 +1,26 @@
-package com.epam.informationHandler.calculatingOperation;
+package com.epam.informationHandler.expressions;
 
-import com.epam.informationHandler.calculatingOperation.terminalExpressions.DivideExpression;
-import com.epam.informationHandler.calculatingOperation.terminalExpressions.MinusExpression;
-import com.epam.informationHandler.calculatingOperation.terminalExpressions.MultiplyExpression;
-import com.epam.informationHandler.calculatingOperation.terminalExpressions.PlusExpression;
+import com.epam.informationHandler.expressions.terminalExpressions.DivideExpression;
+import com.epam.informationHandler.expressions.terminalExpressions.MinusExpression;
+import com.epam.informationHandler.expressions.terminalExpressions.MultiplyExpression;
+import com.epam.informationHandler.expressions.terminalExpressions.PlusExpression;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ExpressionCalculator {
+public class ParserForExpression {
 
     private static final String REGEX_FOR_EXPRESSIONS = "\\p{Blank}+";
 
-    private final List<AbstractMathExpression> expressionList;
+    private List<MathExpression> expressionList;
 
-    public ExpressionCalculator(String expression) {
+    public ParserForExpression(String expression) {
         this.expressionList = new ArrayList<>();
-        parse(expression);
+        parseExpression(expression);
     }
 
-    private void parse(String expression) {
+    private void parseExpression(String expression) {
         for (String lexeme : expression.split(REGEX_FOR_EXPRESSIONS)) {
             if (lexeme.isEmpty()) {
                 continue;
@@ -40,19 +40,19 @@ public class ExpressionCalculator {
                     expressionList.add(new DivideExpression());
                     break;
                 default:
-                    Scanner scan = new Scanner(lexeme);
-                    if (scan.hasNextInt()) {
-                        expressionList.add(new NonTerminalExpression(scan.nextInt()));
+                    Scanner scanner = new Scanner(lexeme);
+                    if (scanner.hasNextInt()) {
+                        expressionList.add(new NonTerminalExpressionWithNumber(scanner.nextInt()));
                     }
             }
         }
     }
 
     public Integer calculate() {
-        Context context = new Context();
-        for (AbstractMathExpression terminal : expressionList) {
-            terminal.interpret(context);
+        ContextWrapper context = new ContextWrapper();
+        for (MathExpression expression : expressionList) {
+            expression.interpret(context);
         }
-        return context.popValue();
+        return context.getAndDeleteValue();
     }
 }

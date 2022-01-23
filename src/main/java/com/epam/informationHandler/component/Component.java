@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Component {
 
-    List<Component> getChildren();
+    List<Component> getComponents();
 }

@@ -50,7 +50,7 @@ public class Lexeme implements Component {
     }
 
     @Override
-    public List<Component> getChildren() {
+    public List<Component> getComponents() {
         LOGGER.info("Unsupported operation in " + this.getClass().getSimpleName());
         throw new UnsupportedOperationException("Unsupported operation in " + this.getClass().getSimpleName());
     }
