@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Composite implements Component {
-    
+
     private final List<Component> components = new ArrayList<>();
 
     public Composite() {
