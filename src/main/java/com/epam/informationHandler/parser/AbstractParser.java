@@ -21,8 +21,8 @@ public abstract class AbstractParser implements Parser {
     protected Composite parseByTemplate(String text, String regExDelimiter) {
         Composite result = new Composite();
         String[] parsedText = text.split(regExDelimiter);
-        for (String textElement : parsedText) {
-            Component textPart = getSuccessor().parse(textElement);
+        for (String element : parsedText) {
+            Component textPart = getSuccessor().parse(element);
             result.add(textPart);
         }
         return result;

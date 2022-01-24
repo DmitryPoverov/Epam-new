@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ParserForExpression {
+public class CalculatorForExpression {
 
     private static final String REGEX_FOR_EXPRESSIONS = "\\p{Blank}+";
 
     private List<MathExpression> expressionList;
 
-    public ParserForExpression(String expression) {
+    public CalculatorForExpression(String expression) {
         this.expressionList = new ArrayList<>();
         parseExpression(expression);
     }
