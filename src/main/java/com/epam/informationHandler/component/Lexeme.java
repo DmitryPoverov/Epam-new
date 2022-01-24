@@ -26,10 +26,10 @@ public class Lexeme implements Component {
     public String getValue() {
         return value;
     }
+
     public LexemeType getLexemeType() {
         return lexemeType;
     }
-
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -42,6 +42,7 @@ public class Lexeme implements Component {
         result = 31 * result + (lexemeType != null ? lexemeType.hashCode() : 0);
         return result;
     }
+
     public String toString() {
         return "Lexeme{" +
                 "value='" + value + '\'' +
@@ -50,7 +51,7 @@ public class Lexeme implements Component {
     }
 
     @Override
-    public List<Component> getComponents() {
+    public List<Component> getTextParts() {
         LOGGER.info("Unsupported operation in " + this.getClass().getSimpleName());
         throw new UnsupportedOperationException("Unsupported operation in " + this.getClass().getSimpleName());
     }

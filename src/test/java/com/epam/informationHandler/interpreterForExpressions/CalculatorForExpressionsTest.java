@@ -1,4 +1,4 @@
-package com.epam.informationHandler.expressions;
+package com.epam.informationHandler.interpreterForExpressions;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,10 +11,8 @@ public class CalculatorForExpressionsTest {
     private static final int ANSWER_FOR_SUBTRACTION = 6;
     private static final String EXPRESSION_FOR_MULTIPLYING = "[ 2 8 * ]";
     private static final int ANSWER_FOR_MULTIPLYING = 16;
-    private static final String EXPRESSION_FOR_ADDITION = "[ 2 8 + ]";
-    private static final int ANSWER_FOR_ADDITION = 10;
-
-
+    private static final String EXPRESSION_FOR_ADDING = "[ 2 8 + ]";
+    private static final int ANSWER_FOR_ADDING = 10;
 
     @Test
     public void testCalculateShouldDivideValuesFromExpression() {
@@ -41,7 +39,7 @@ public class CalculatorForExpressionsTest {
     }
 
     @Test
-    public void testCalculateShouldMultiplyValuesFromExpression() {
+    public void testCalculateShouldMultiplyValues() {
         //given.
         String expression = EXPRESSION_FOR_MULTIPLYING;
         CalculatorForExpression calculator = new CalculatorForExpression(expression);
@@ -55,9 +53,9 @@ public class CalculatorForExpressionsTest {
     @Test
     public void testCalculateShouldAddValuesFromExpression() {
         //given.
-        String expression = EXPRESSION_FOR_ADDITION;
+        String expression = EXPRESSION_FOR_ADDING;
         CalculatorForExpression calculator = new CalculatorForExpression(expression);
-        Integer expected = ANSWER_FOR_ADDITION;
+        Integer expected = ANSWER_FOR_ADDING;
         //when
         Integer actual = calculator.calculate();
         //then

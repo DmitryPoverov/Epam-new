@@ -1,9 +1,9 @@
-package com.epam.informationHandler.expressions;
+package com.epam.informationHandler.interpreterForExpressions;
 
-import com.epam.informationHandler.expressions.terminalExpressions.DivideExpression;
-import com.epam.informationHandler.expressions.terminalExpressions.MinusExpression;
-import com.epam.informationHandler.expressions.terminalExpressions.MultiplyExpression;
-import com.epam.informationHandler.expressions.terminalExpressions.PlusExpression;
+import com.epam.informationHandler.interpreterForExpressions.terminalExpressions.DivideExpression;
+import com.epam.informationHandler.interpreterForExpressions.terminalExpressions.MinusExpression;
+import com.epam.informationHandler.interpreterForExpressions.terminalExpressions.MultiplyExpression;
+import com.epam.informationHandler.interpreterForExpressions.terminalExpressions.PlusExpression;
 
 import java.util.ArrayList;
 import java.util.List;

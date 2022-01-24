@@ -4,7 +4,7 @@ import com.epam.informationHandler.component.Component;
 
 public class ParagraphParser extends AbstractParser {
 
-    public static final String REGEX_FOR_SENTENCE_DELIMITER = "[\\.\\?\\!\\.{3}]";
+    public static final String REGEX_FOR_SENTENCE_DELIMITER = "(?<=[\\.?!]){3}[\\n\\s]";
 
     public ParagraphParser(Parser successor) {
         super(successor);

@@ -5,7 +5,8 @@ import com.epam.informationHandler.component.Lexeme;
 
 public class SentenceParser extends AbstractParser {
 
-    private static final String REGEX_FOR_LEXEME = "\\s";
+    private static final String REGEX_FOR_LEXEME = "\\s(?=\\[)|(?<=])\\s";
+    private static final String REGEX_FOR_WORDS = "\\s";
 
     @Override
     public Composite parse(String text) {
@@ -15,9 +16,14 @@ public class SentenceParser extends AbstractParser {
             if (lexeme.contains("[")) {
                 composite.add(Lexeme.expression(lexeme));
             } else {
-                composite.add(Lexeme.word(lexeme));
+                String[] splitWords = lexeme.split(REGEX_FOR_WORDS);
+                for (String word : splitWords) {
+                    composite.add(Lexeme.word(word));
+                }
             }
         }
         return composite;
     }
+
+
 }

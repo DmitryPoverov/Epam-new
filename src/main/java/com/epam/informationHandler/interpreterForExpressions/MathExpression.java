@@ -1,4 +1,4 @@
-package com.epam.informationHandler.expressions;
+package com.epam.informationHandler.interpreterForExpressions;
 
 public abstract class MathExpression {
 
