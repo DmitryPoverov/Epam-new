@@ -13,19 +13,14 @@ public class SentenceParserTest {
     private static final String SENTENCE_FOR_TEST = "Lorem [ 8 2 / ] ipsum dolor sit amet!";
 
     @Test
-    public void testParseShouldParseSentenceWithExpression() {
+    public void testSentenceParseShouldParseSentenceWithExpression() {
         //given
-        Component expectedComposite = new Composite(Arrays.asList(
-                Lexeme.word("Lorem"),
-                Lexeme.expression("[ 8 2 / ]"),
-                Lexeme.word("ipsum"),
-                Lexeme.word("dolor"),
-                Lexeme.word("sit"),
-                Lexeme.word("amet!")));
+        Component expected = new Composite(Arrays.asList(Lexeme.word("Lorem"), Lexeme.expression("[ 8 2 / ]"),
+                Lexeme.word("ipsum"), Lexeme.word("dolor"), Lexeme.word("sit"), Lexeme.word("amet!")));
         SentenceParser sentenceParser = new SentenceParser();
         //when
         Component actualSentenceComposite = sentenceParser.parse(SENTENCE_FOR_TEST);
         //then
-        Assert.assertEquals(expectedComposite, actualSentenceComposite);
+        Assert.assertEquals(expected, actualSentenceComposite);
     }
 }
