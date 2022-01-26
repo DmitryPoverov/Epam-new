@@ -4,9 +4,9 @@ import com.epam.informationHandler.comparator.ComparatorForComponents;
 import com.epam.informationHandler.component.Component;
 import com.epam.informationHandler.component.Composite;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class TextOperations {
@@ -19,16 +19,18 @@ public class TextOperations {
         return listOfParagraphs;
     }
 
-    public static List<Component> sortWordsInSentenceByWordLength(Composite text) {
-        List<Component> listOfLexemes = new ArrayList<>(text.getTextParts());
+    public static List<Component> sortWordsInSentenceByWordLength(Component text) {
+        List<Component> listOfLexemes = text.getTextParts();
         listOfLexemes.sort(Comparator.comparing(Component::getValue));
         return listOfLexemes;
     }
 
     public static String restoreStartText(Component text) {
-        String startingText = text.getTextParts().stream()
-                .map(Component::getValue)
-                .collect(Collectors.joining(" "));
-        return startingText;
+        StringJoiner joiner = new StringJoiner(" ");
+        for (Component component : text.getTextParts()) {
+            String value = component.getValue();
+            joiner.add(value);
+        }
+        return joiner.toString();
     }
 }

@@ -66,5 +66,4 @@ public class TextParserTest {
                 .parse(PARAGRAPH_THREE);
         Mockito.verifyNoMoreInteractions(paragraphParser);
     }
-
 }

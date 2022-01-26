@@ -6,12 +6,12 @@ import org.junit.Test;
 public class CalculatorForExpressionsTest {
 
     private static final String EXPRESSION_FOR_DIVIDING = "[ 2 8 / ]";
-    private static final int ANSWER_FOR_DIVIDING = 4;
     private static final String EXPRESSION_FOR_SUBTRACTION = "[ 2 8 - ]";
-    private static final int ANSWER_FOR_SUBTRACTION = 6;
     private static final String EXPRESSION_FOR_MULTIPLYING = "[ 2 8 * ]";
-    private static final int ANSWER_FOR_MULTIPLYING = 16;
     private static final String EXPRESSION_FOR_ADDING = "[ 2 8 + ]";
+    private static final int ANSWER_FOR_DIVIDING = 4;
+    private static final int ANSWER_FOR_SUBTRACTION = 6;
+    private static final int ANSWER_FOR_MULTIPLYING = 16;
     private static final int ANSWER_FOR_ADDING = 10;
 
     @Test
